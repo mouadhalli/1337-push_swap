@@ -10,4 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME:
+NAME = pushswap
+
+SRC = push_swap.c
+
+FLAGS = -Wall -Wextra -Werror
+
+LIBS = libft/libft.a \
+
+all: $(NAME)
+
+$(NAME):
+	@make -C libft
+	@gcc $(SRC) $(LIBS) -o $(NAME)
+
+clean:
+	@make -C libft clean
+
+fclean: clean
+	@make -C libft fclean
+	@rm -f $(NAME)
+
+re:	fclean all
