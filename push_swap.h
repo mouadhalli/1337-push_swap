@@ -14,13 +14,23 @@
 # define PUSH_SWAP_H
 
 #include "libft/libft.h"
+#include "limits.h"
+
+typedef struct s_details
+{
+    int     		lenght;
+    
+}               t_details;
 
 typedef	struct	s_nbr
 {
-	int     nbr;
-    char    *nbr_str;
+	long           nbr;
+    t_details 	  detls;
     struct  s_nbr *next;
+    struct  s_nbr *prev;
 
 }				t_nbr;
+
+
 
 #endif

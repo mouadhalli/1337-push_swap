@@ -12,13 +12,12 @@
 
 #include "push_swap.h"
 
-t_nbr    *init_node(int nbr, char *nbr_str)
+t_nbr    *init_node(int nbr)
 {
     t_nbr *node;
 
     node = (t_nbr *)malloc(sizeof(t_nbr));
     node->nbr = nbr;
-    node->nbr_str = nbr_str;
     node->next = NULL;
     return (node);
 }
@@ -44,34 +43,94 @@ void    add_node(t_nbr **head, t_nbr *new_node)
 	}
 }
 
-void	printf_list(t_nbr *head)
+void	print_list(t_nbr *head)
 {
 	while (head->next != NULL)
 	{
-		printf("%d\n", head->nbr);
+		printf("nbr == %ld\n", head->nbr);
 		head = head->next;
 	}
-	printf("%d\n", head->nbr);
+	printf("nbr == %ld\n", head->nbr);
+
 }
 
-void	exit_error(char *err_msg, int stream)
+void	exit_error(int stream)
 {
 	ft_putstr_fd("error:\n", stream);
-	ft_putstr_fd(err_msg, stream);
 	exit(-1);
 }
 
+//----------------------ACTIONS--------------------//
+
+void	swap_firstwo(t_nbr *head)
+{
+	if (head->detls.lenght > 1)
+	{
+		head->nbr = head->nbr + head->next->nbr;				// a = a + b // 5 = 5 + 4 => 9
+		head->next->nbr = head->nbr - head->next->nbr;			// b = a - b => (a + b) - b // 4 = 9 - 4 => 5
+		head->nbr = head->nbr - head->next->nbr;				// 5 + 4 = 9 || 9 - 4 = 5 || 9 - 5 = 4
+	}
+}
+
+void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
+{
+	swap_firstwo(stack_a);
+	swap_firstwo(stack_b);
+}
+
+void	rotate_stack(t_nbr *head)
+{
+	int		tmp;
+
+	tmp = head->nbr;
+	while(head->next != NULL)
+	{
+		head->nbr = head->next->nbr;
+		head->next->nbr = tmp;
+		head = head->next;
+	}
+}
+
+void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
+{
+	rotate_stack(stack_a);
+	rotate_stack(stack_b);
+}
+
+void	push_stacktop(t_nbr	*target, t_nbr *dst)
+{
+
+	if (target->nbr < INT_MAX)
+	{
+		add_node(&dst, init_node(target->nbr));
+		target->nbr = INT_MAX;
+	}
+}
+
+
+//--------------------------------------------------//
+
 int     main(int argc, char **argv)
 {
-    t_nbr *head;
+    t_nbr *stack_a;
+    t_nbr *stack_b;
     int     i;
 
     i = 0;
-    head = NULL;
+    stack_a = NULL;
+    stack_b = NULL;
 	if (argc < 2)
-		exit_error("no numbers to sort\n", 1);
+		exit_error(1);
     while (++i < argc)
-        add_node(&head, init_node(ft_atoi(argv[i]), ft_strdup(argv[i])));
-	printf_list(head);
+	{
+        add_node(&stack_a, init_node(ft_atoi(argv[i])));
+        add_node(&stack_b, init_node(INT_MAX));
+	}
+	stack_a->detls.lenght = argc - 1;
+	stack_b->nbr = 30;											//Remove this line later its just for testing
+	print_list(stack_a);
+	push_stacktop(stack_b, stack_a);
+	printf("---------------------------------\n");
+	print_list(stack_a);
     return (0);
 }
