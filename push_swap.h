@@ -29,6 +29,22 @@ typedef	struct	s_nbr
     struct  s_nbr *next;
 }				t_nbr;
 
+//---- PUSH SWAP ACTIONS -----//
+
+void	push_stacktop(t_nbr	*target, t_nbr *dst);
+void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
+void	rev_rotate_stack(t_nbr *head);
+void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
+void	rotate_stack(t_nbr *head);
+void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b);
+void	swap_firstwo(t_nbr *head);
+
+//---- LINKED LISTS FUNCTIONS -----//
+
+t_nbr    *init_node(int nbr);
+void    add_node(t_nbr **head, t_nbr *new_node);
+t_nbr    *getlast_node(t_nbr *head);
+void	print_list(t_nbr *head);
 
 
 #endif
