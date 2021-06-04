@@ -97,12 +97,39 @@ void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 	rotate_stack(stack_b);
 }
 
+void	rev_rotate_stack(t_nbr *head)
+{
+	int		tmp;
+	int		tmp2;
+	t_nbr	*tail;
+
+	tail = getlast_node(head);
+	tmp2 = 0;
+	tmp = head->next->nbr;
+	head->next->nbr = head->nbr;
+	head->nbr = tail->nbr;
+	head = head->next;
+	while (head->next != NULL)
+	{
+		tmp2 = head->next->nbr;
+		head->next->nbr = tmp;
+		tmp = tmp2;
+		head = head->next;
+	}
+}
+
+void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
+{
+	rev_rotate_stack(stack_a);
+	rev_rotate_stack(stack_b);
+}
+
 void	push_stacktop(t_nbr	*target, t_nbr *dst)
 {
 
 	if (target->nbr < INT_MAX)
 	{
-		add_node(&dst, init_node(target->nbr));
+		dst->nbr = target->nbr;
 		target->nbr = INT_MAX;
 	}
 }
@@ -127,10 +154,16 @@ int     main(int argc, char **argv)
         add_node(&stack_b, init_node(INT_MAX));
 	}
 	stack_a->detls.lenght = argc - 1;
-	stack_b->nbr = 30;											//Remove this line later its just for testing
-	print_list(stack_a);
-	push_stacktop(stack_b, stack_a);
 	printf("---------------------------------\n");
+	printf("Befor\n");
 	print_list(stack_a);
+	// rotate_stack(stack_a);
+	// push_stacktop(stack_b, stack_a);
+	rev_rotate_stack(stack_a);
+	// swap_firstwo(stack_a);
+	printf("---------------------------------\n");
+	printf("After\n");
+	print_list(stack_a);
+	printf("---------------------------------\n");
     return (0);
 }

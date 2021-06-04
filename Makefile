@@ -23,14 +23,14 @@ LIBS = libft/libft.a \
 all: $(NAME)
 
 $(NAME):
-	@make -C libft
-	@gcc $(SRC) $(FLAGS) $(MOMALA7AT) $(LIBS) -o $(NAME)
+	@make --no-print-directory -C libft
+	@gcc $(SRC) $(LIBS) -o $(NAME)
 
 clean:
-	@make -C libft clean
+	@make --no-print-directory -C libft clean
 
 fclean: clean
-	@make -C libft fclean
+	@make --no-print-directory -C libft fclean
 	@rm -f $(NAME)
 
 re:	fclean all

@@ -27,8 +27,6 @@ typedef	struct	s_nbr
 	long           nbr;
     t_details 	  detls;
     struct  s_nbr *next;
-    struct  s_nbr *prev;
-
 }				t_nbr;
 
 
