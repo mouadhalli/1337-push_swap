@@ -78,12 +78,12 @@ void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 
 void	push_stacktop(t_nbr	*target, t_nbr *dst)
 {
-
-	if (target->nbr < INT_MAX)
-	{
-		dst->nbr = target->nbr;
-		target->nbr = INT_MAX;
-	}
+	while (target->nbr == INT_MAX)
+		target = target->next;
+	if (dst->nbr < INT_MAX)
+		rotate_stack(dst);
+	dst->nbr = target->nbr;
+	target->nbr = INT_MAX;
 }
 
 //--------------------------------------------------//

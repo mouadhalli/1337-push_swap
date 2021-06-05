@@ -27,8 +27,8 @@ int		get_index(t_nbr *head, int nbr)
 	{
 		if (head->nbr == nbr)
 			break;
-		head = head->next;
 		i++;
+		head = head->next;
 	}
 	return (i);
 }
@@ -44,6 +44,8 @@ int		bigest_nbr(t_nbr *head)
 			nbr = head->nbr;
 		head = head->next;
 	}
+	if (head->nbr > nbr)
+		nbr = head->nbr;
 	return (nbr);
 }
 
@@ -51,11 +53,16 @@ int		small_nbr(t_nbr *head)
 {
 	int		nbr;
 
-	nbr = 0;
+	nbr = head->nbr;
 	while (head->next != NULL)
 	{
-
+		if (head->nbr < nbr)
+			nbr = head->nbr;
+		head = head->next;
 	}
+	if (head->nbr < nbr)
+		nbr = head->nbr;
+	return (nbr);
 }
 
 void	oh_baby_its_triple(t_nbr *head)
@@ -76,9 +83,45 @@ void	oh_baby_its_triple(t_nbr *head)
 		swap_firstwo(head);
 }
 
-void	sort_five(t_nbr *head)
+void	rotat_push(t_nbr *head_a, t_nbr *head_b, int index)
 {
+	if (index > 0)
+	{
+		if (index <= 2)
+		{
+			while (index)
+			{
+				rotate_stack(head_a);
+				index--;
+			}
+		}
+		else if (index > 2)
+		{
+			while (index < 5)
+			{
+				rev_rotate_stack(head_a);
+				index++;
+			}
+			index = 0;
+		}
+	}
+	if (index == 0)
+		push_stacktop(head_a, head_b);
+}
 
+void	sort_five(t_nbr *head_a, t_nbr *head_b)
+{
+	int		nbr;
+	int		index;
+	int		i;
+
+	i = -1;
+	while (++i < 2)
+	{
+		nbr = small_nbr(head_a);
+		index = get_index(head_a, nbr);
+		rotat_push(head_a, head_b, index);
+	}
 }
 
 void	sort_smallstack(t_nbr *stack_a, t_nbr *stack_b)
@@ -88,7 +131,7 @@ void	sort_smallstack(t_nbr *stack_a, t_nbr *stack_b)
 	if (stack_a->detls.lenght  == 3)
 		oh_baby_its_triple(stack_a);
 	if (stack_a->detls.lenght == 5)
-		sort_five(stack_a);
+		sort_five(stack_a, stack_b);
 }
 
 int     main(int argc, char **argv)
@@ -114,12 +157,11 @@ int     main(int argc, char **argv)
 	if (stack_a->detls.lenght <= 5)
 		sort_smallstack(stack_a, stack_b);
 	// rotate_stack(stack_a);
-	// push_stacktop(stack_b, stack_a);
 	// rev_rotate_stack(stack_a);
 	// swap_firstwo(stack_a);
 	printf("---------------------------------\n");
 	printf("After :\n");
 	print_list(stack_a);
-	printf("---------------------------------\n");
+	// printf("---------------------------------\n");
     return (0);
 }
