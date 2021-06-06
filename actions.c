@@ -16,7 +16,7 @@
 
 void	swap_firstwo(t_nbr *head)
 {
-	if (head->detls.lenght > 1)
+	if (head->detls->lenght > 1)
 	{
 		head->nbr = head->nbr + head->next->nbr;				// a = a + b // 5 = 5 + 4 => 9
 		head->next->nbr = head->nbr - head->next->nbr;			// b = a - b => (a + b) - b // 4 = 9 - 4 => 5
@@ -76,14 +76,14 @@ void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 	rev_rotate_stack(stack_b);
 }
 
-void	push_stacktop(t_nbr	*target, t_nbr *dst)
+void	push_stacktop(t_nbr	**target, t_nbr **dst)
 {
-	while (target->nbr == INT_MAX)
-		target = target->next;
-	if (dst->nbr < INT_MAX)
-		rotate_stack(dst);
-	dst->nbr = target->nbr;
-	target->nbr = INT_MAX;
+	while ((*target)->nbr == LONG_MAX)
+		(*target) = (*target)->next;
+	if ((*dst)->nbr < LONG_MAX)
+		rotate_stack(*dst);
+	(*dst)->nbr = (*target)->nbr;
+	(*target)->nbr = LONG_MAX;
 }
 
 //--------------------------------------------------//

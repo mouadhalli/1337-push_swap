@@ -12,11 +12,12 @@
 
 #include "push_swap.h"
 
-t_nbr    *init_node(int nbr)
+t_nbr    *init_node(long nbr)
 {
     t_nbr *node;
 
     node = (t_nbr *)malloc(sizeof(t_nbr));
+	node->detls = (t_details *)malloc(sizeof(t_details));
     node->nbr = nbr;
     node->next = NULL;
     return (node);

@@ -83,7 +83,7 @@ void	oh_baby_its_triple(t_nbr *head)
 		swap_firstwo(head);
 }
 
-void	rotat_push(t_nbr *head_a, t_nbr *head_b, int index)
+void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index)
 {
 	if (index > 0)
 	{
@@ -91,7 +91,7 @@ void	rotat_push(t_nbr *head_a, t_nbr *head_b, int index)
 		{
 			while (index)
 			{
-				rotate_stack(head_a);
+				rotate_stack(*head_a);
 				index--;
 			}
 		}
@@ -99,7 +99,7 @@ void	rotat_push(t_nbr *head_a, t_nbr *head_b, int index)
 		{
 			while (index < 5)
 			{
-				rev_rotate_stack(head_a);
+				rev_rotate_stack(*head_a);
 				index++;
 			}
 			index = 0;
@@ -109,7 +109,7 @@ void	rotat_push(t_nbr *head_a, t_nbr *head_b, int index)
 		push_stacktop(head_a, head_b);
 }
 
-void	sort_five(t_nbr *head_a, t_nbr *head_b)
+void	sort_five(t_nbr **head_a, t_nbr **head_b)
 {
 	int		nbr;
 	int		index;
@@ -118,19 +118,19 @@ void	sort_five(t_nbr *head_a, t_nbr *head_b)
 	i = -1;
 	while (++i < 2)
 	{
-		nbr = small_nbr(head_a);
-		index = get_index(head_a, nbr);
+		nbr = small_nbr(*head_a);
+		index = get_index(*head_a, nbr);
 		rotat_push(head_a, head_b, index);
 	}
 }
 
-void	sort_smallstack(t_nbr *stack_a, t_nbr *stack_b)
+void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
 {
 	(void)stack_b;
 
-	if (stack_a->detls.lenght  == 3)
-		oh_baby_its_triple(stack_a);
-	if (stack_a->detls.lenght == 5)
+	if ((*stack_a)->detls->lenght  == 3)
+		oh_baby_its_triple(*stack_a);
+	if ((*stack_a)->detls->lenght == 5)
 		sort_five(stack_a, stack_b);
 }
 
@@ -148,20 +148,17 @@ int     main(int argc, char **argv)
     while (++i < argc)
 	{
         add_node(&stack_a, init_node(ft_atoi(argv[i])));
-        add_node(&stack_b, init_node(INT_MAX));
+        add_node(&stack_b, init_node(LONG_MAX));
+		stack_a->detls->lenght = argc - 1;
 	}
-	stack_a->detls.lenght = argc - 1;
 	printf("---------------------------------\n");
 	printf("Befor :\n");
 	print_list(stack_a);
-	if (stack_a->detls.lenght <= 5)
-		sort_smallstack(stack_a, stack_b);
-	// rotate_stack(stack_a);
-	// rev_rotate_stack(stack_a);
-	// swap_firstwo(stack_a);
+	if (stack_a->detls->lenght <= 5)
+		sort_smallstack(&stack_a, &stack_b);
 	printf("---------------------------------\n");
 	printf("After :\n");
 	print_list(stack_a);
-	// printf("---------------------------------\n");
+	printf("---------------------------------\n");
     return (0);
 }
