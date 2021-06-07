@@ -32,7 +32,7 @@ void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
 
 void	rotate_stack(t_nbr *head)
 {
-	int		tmp;
+	long		tmp;
 
 	tmp = head->nbr;
 	while(head->next != NULL)
@@ -51,8 +51,8 @@ void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 
 void	rev_rotate_stack(t_nbr *head)
 {
-	int		tmp;
-	int		tmp2;
+	long		tmp;
+	long		tmp2;
 	t_nbr	*tail;
 
 	tail = getlast_node(head);
@@ -78,12 +78,25 @@ void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst)
 {
-	while ((*target)->nbr == LONG_MAX)
-		(*target) = (*target)->next;
-	if ((*dst)->nbr < LONG_MAX)
-		rotate_stack(*dst);
-	(*dst)->nbr = (*target)->nbr;
-	(*target)->nbr = LONG_MAX;
+	// t_nbr *tmp1;
+	// t_nbr *tmp2;
+
+	// tmp1 = *dst;
+	// tmp2 = *target;
+
+	// while (tmp2->nbr == LONG_MAX && tmp2->next != NULL)
+	// 	tmp2 = tmp2->next;
+	// while (tmp1->next != NULL && tmp1->next->nbr == LONG_MAX)
+	// 	tmp1 = tmp1->next;
+	// tmp1->nbr = tmp2->nbr;
+	// tmp2->nbr = LONG_MAX;
+	//------------------------------//
+	if ((*dst) == NULL)
+		add_node(dst, init_node((*target)->nbr, 0));
+	else
+		new_head(dst, init_node((*target)->nbr, 0));
+	remove_node(target, *target);
+
 }
 
 //--------------------------------------------------//

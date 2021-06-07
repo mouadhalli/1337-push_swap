@@ -12,13 +12,14 @@
 
 #include "push_swap.h"
 
-t_nbr    *init_node(long nbr)
+t_nbr    *init_node(long nbr, int lenght)
 {
     t_nbr *node;
 
     node = (t_nbr *)malloc(sizeof(t_nbr));
 	node->detls = (t_details *)malloc(sizeof(t_details));
     node->nbr = nbr;
+	node->detls->lenght = lenght;
     node->next = NULL;
     return (node);
 }
@@ -44,13 +45,42 @@ void    add_node(t_nbr **head, t_nbr *new_node)
 	}
 }
 
+void	free_node(t_nbr *node)
+{
+	free(node->detls);
+	free(node);
+}
+
+
+void	remove_node(t_nbr **head, t_nbr *target)
+{
+	t_nbr *tmp;
+	// t_nbr *left;
+	// t_nbr *right;
+
+	tmp = *head;
+	if (target = tmp)
+	{
+		(*head) = tmp->next;
+		free_node(tmp);
+	}
+}
+
+void	new_head(t_nbr **oldhead, t_nbr *newhead)
+{
+	newhead->next = *oldhead;
+	(*oldhead) = newhead;
+}
+
 void	print_list(t_nbr *head)
 {
-	while (head->next != NULL)
+	if (head != NULL)
 	{
+		while (head->next != NULL)
+		{
+			printf("nbr == %ld\n", head->nbr);
+			head = head->next;
+		}
 		printf("nbr == %ld\n", head->nbr);
-		head = head->next;
 	}
-	printf("nbr == %ld\n", head->nbr);
-
 }

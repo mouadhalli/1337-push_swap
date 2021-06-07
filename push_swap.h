@@ -41,10 +41,12 @@ void	swap_firstwo(t_nbr *head);
 
 //---- LINKED LISTS FUNCTIONS -----//
 
-t_nbr    *init_node(long nbr);
+t_nbr    *init_node(long nbr, int lenght);
 void    add_node(t_nbr **head, t_nbr *new_node);
 t_nbr    *getlast_node(t_nbr *head);
 void	print_list(t_nbr *head);
+void	remove_node(t_nbr **head, t_nbr *target);
+void	new_head(t_nbr **oldhead, t_nbr *newhead);
 
 
 #endif

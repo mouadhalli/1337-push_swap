@@ -51,12 +51,12 @@ int		bigest_nbr(t_nbr *head)
 
 int		small_nbr(t_nbr *head)
 {
-	int		nbr;
+	long		nbr;
 
 	nbr = head->nbr;
 	while (head->next != NULL)
 	{
-		if (head->nbr < nbr)
+		if (head->nbr < nbr )
 			nbr = head->nbr;
 		head = head->next;
 	}
@@ -122,6 +122,9 @@ void	sort_five(t_nbr **head_a, t_nbr **head_b)
 		index = get_index(*head_a, nbr);
 		rotat_push(head_a, head_b, index);
 	}
+	oh_baby_its_triple(*head_a);
+	push_stacktop(head_b, head_a);
+	push_stacktop(head_b, head_a);
 }
 
 void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
@@ -146,11 +149,7 @@ int     main(int argc, char **argv)
 	if (argc < 2)
 		exit_error(1);
     while (++i < argc)
-	{
-        add_node(&stack_a, init_node(ft_atoi(argv[i])));
-        add_node(&stack_b, init_node(LONG_MAX));
-		stack_a->detls->lenght = argc - 1;
-	}
+        add_node(&stack_a, init_node(ft_atoi(argv[i]), argc - 1));
 	printf("---------------------------------\n");
 	printf("Befor :\n");
 	print_list(stack_a);
