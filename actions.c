@@ -16,18 +16,17 @@
 
 void	swap_firstwo(t_nbr *head)
 {
-	if (head->detls->lenght > 1)
-	{
-		head->nbr = head->nbr + head->next->nbr;				// a = a + b // 5 = 5 + 4 => 9
-		head->next->nbr = head->nbr - head->next->nbr;			// b = a - b => (a + b) - b // 4 = 9 - 4 => 5
-		head->nbr = head->nbr - head->next->nbr;				// 5 + 4 = 9 || 9 - 4 = 5 || 9 - 5 = 4
-	}
+	head->nbr = head->nbr + head->next->nbr;				// a = a + b // 5 = 5 + 4 => 9
+	head->next->nbr = head->nbr - head->next->nbr;			// b = a - b => (a + b) - b // 4 = 9 - 4 => 5
+	head->nbr = head->nbr - head->next->nbr;				// 5 + 4 = 9 || 9 - 4 = 5 || 9 - 5 = 4
+	// printf("action\n");
 }
 
 void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
 {
 	swap_firstwo(stack_a);
 	swap_firstwo(stack_b);
+	// printf("action\n");
 }
 
 void	rotate_stack(t_nbr *head)
@@ -41,12 +40,14 @@ void	rotate_stack(t_nbr *head)
 		head->next->nbr = tmp;
 		head = head->next;
 	}
+	// printf("action\n");
 }
 
 void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
 	rotate_stack(stack_a);
 	rotate_stack(stack_b);
+	// printf("action\n");
 }
 
 void	rev_rotate_stack(t_nbr *head)
@@ -68,35 +69,24 @@ void	rev_rotate_stack(t_nbr *head)
 		tmp = tmp2;
 		head = head->next;
 	}
+	// printf("action\n");
 }
 
 void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
 	rev_rotate_stack(stack_a);
 	rev_rotate_stack(stack_b);
+	// printf("action\n");
 }
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst)
 {
-	// t_nbr *tmp1;
-	// t_nbr *tmp2;
-
-	// tmp1 = *dst;
-	// tmp2 = *target;
-
-	// while (tmp2->nbr == LONG_MAX && tmp2->next != NULL)
-	// 	tmp2 = tmp2->next;
-	// while (tmp1->next != NULL && tmp1->next->nbr == LONG_MAX)
-	// 	tmp1 = tmp1->next;
-	// tmp1->nbr = tmp2->nbr;
-	// tmp2->nbr = LONG_MAX;
-	//------------------------------//
 	if ((*dst) == NULL)
-		add_node(dst, init_node((*target)->nbr, 0));
+		add_node(dst, init_node((*target)->nbr));
 	else
-		new_head(dst, init_node((*target)->nbr, 0));
+		new_head(dst, init_node((*target)->nbr));
 	remove_node(target, *target);
-
+	// printf("action\n");
 }
 
 //--------------------------------------------------//

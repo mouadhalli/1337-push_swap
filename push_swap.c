@@ -18,123 +18,66 @@ void	exit_error(int stream)
 	exit(-1);
 }
 
-int		get_index(t_nbr *head, int nbr)
-{
-	int		i;
-
-	i = 0;
-	while (head->next != NULL)
-	{
-		if (head->nbr == nbr)
-			break;
-		i++;
-		head = head->next;
-	}
-	return (i);
-}
-
-int		bigest_nbr(t_nbr *head)
-{
-	int		nbr;
-
-	nbr = 0;
-	while (head->next != NULL)
-	{
-		if (head->nbr > nbr)
-			nbr = head->nbr;
-		head = head->next;
-	}
-	if (head->nbr > nbr)
-		nbr = head->nbr;
-	return (nbr);
-}
-
-int		small_nbr(t_nbr *head)
-{
-	long		nbr;
-
-	nbr = head->nbr;
-	while (head->next != NULL)
-	{
-		if (head->nbr < nbr )
-			nbr = head->nbr;
-		head = head->next;
-	}
-	if (head->nbr < nbr)
-		nbr = head->nbr;
-	return (nbr);
-}
-
-void	oh_baby_its_triple(t_nbr *head)
+void	sort_tree(t_nbr *head)
 {
 	int		bignbr;
-	int		index;
+	int		pos;
 
-	bignbr = bigest_nbr(head);
-	index = get_index(head, bignbr);
-	if (index < 2)
+	if (stack_lenght(head) == 3)
 	{
-		if (index == 0)
-			rotate_stack(head);
-		else if (index == 1)
-			rev_rotate_stack(head);
+		bignbr = bigest_nbr(head);
+		pos = get_pos(head, bignbr);
+		if (pos < 3)
+		{
+			if (pos == 1)
+				rotate_stack(head);
+			else if (pos == 2)
+				rev_rotate_stack(head);
+		}
 	}
 	if (head->nbr > head->next->nbr)
 		swap_firstwo(head);
 }
 
-void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index)
-{
-	if (index > 0)
-	{
-		if (index <= 2)
-		{
-			while (index)
-			{
-				rotate_stack(*head_a);
-				index--;
-			}
-		}
-		else if (index > 2)
-		{
-			while (index < 5)
-			{
-				rev_rotate_stack(*head_a);
-				index++;
-			}
-			index = 0;
-		}
-	}
-	if (index == 0)
-		push_stacktop(head_a, head_b);
-}
-
 void	sort_five(t_nbr **head_a, t_nbr **head_b)
 {
 	int		nbr;
-	int		index;
-	int		i;
+	int		pos;
 
-	i = -1;
-	while (++i < 2)
+	while (stack_lenght(*head_a) >= 3)
 	{
 		nbr = small_nbr(*head_a);
-		index = get_index(*head_a, nbr);
-		rotat_push(head_a, head_b, index);
+		pos = get_pos(*head_a, nbr);
+		rotat_push(head_a, head_b, pos);
+		if (stack_lenght(*head_a) == 3)
+		{
+			sort_tree(*head_a);
+			while (stack_lenght(*head_b) > 0)
+				push_stacktop(head_b, head_a);
+			break;
+		}
 	}
-	oh_baby_its_triple(*head_a);
-	push_stacktop(head_b, head_a);
-	push_stacktop(head_b, head_a);
 }
 
 void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
 {
 	(void)stack_b;
 
-	if ((*stack_a)->detls->lenght  == 3)
-		oh_baby_its_triple(*stack_a);
-	if ((*stack_a)->detls->lenght == 5)
+	if (stack_lenght(*stack_a) <= 3)
+		sort_tree(*stack_a);
+	else if (stack_lenght(*stack_a) <= 5)
 		sort_five(stack_a, stack_b);
+}
+
+void	sort_onehundred(t_nbr **stack_a, t_nbr **stack_b)
+{
+	(void)stack_a;
+	(void)stack_b;
+}
+void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
+{
+	(void)stack_a;
+	(void)stack_b;
 }
 
 int     main(int argc, char **argv)
@@ -149,12 +92,19 @@ int     main(int argc, char **argv)
 	if (argc < 2)
 		exit_error(1);
     while (++i < argc)
-        add_node(&stack_a, init_node(ft_atoi(argv[i]), argc - 1));
+        add_node(&stack_a, init_node(ft_atoi(argv[i])));
 	printf("---------------------------------\n");
 	printf("Befor :\n");
 	print_list(stack_a);
-	if (stack_a->detls->lenght <= 5)
-		sort_smallstack(&stack_a, &stack_b);
+	if (stack_lenght(stack_a) > 1)
+	{
+		if (stack_lenght(stack_a) <= 5)
+			sort_smallstack(&stack_a, &stack_b);
+		else if (stack_lenght(stack_a) > 5)
+			sort_bigstack(&stack_a, &stack_b);
+	}
+	// int test = stack_lenght(stack_b);
+	// printf("===========>%d\n", test);
 	printf("---------------------------------\n");
 	printf("After :\n");
 	print_list(stack_a);

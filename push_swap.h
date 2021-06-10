@@ -14,20 +14,21 @@
 # define PUSH_SWAP_H
 
 #include "libft/libft.h"
-#include "limits.h"
-
-typedef struct s_details
-{
-    int     		lenght;
-    
-}               t_details;
 
 typedef	struct	s_nbr
 {
 	long           nbr;
-    t_details 	  *detls;
     struct  s_nbr *next;
 }				t_nbr;
+
+//---- LINKED LISTS FUNCTIONS -----//
+
+t_nbr    *init_node(long nbr);
+void    add_node(t_nbr **head, t_nbr *new_node);
+t_nbr    *getlast_node(t_nbr *head);
+void	print_list(t_nbr *head);
+void	remove_node(t_nbr **head, t_nbr *target);
+void	new_head(t_nbr **oldhead, t_nbr *newhead);
 
 //---- PUSH SWAP ACTIONS -----//
 
@@ -39,14 +40,18 @@ void	rotate_stack(t_nbr *head);
 void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b);
 void	swap_firstwo(t_nbr *head);
 
-//---- LINKED LISTS FUNCTIONS -----//
 
-t_nbr    *init_node(long nbr, int lenght);
-void    add_node(t_nbr **head, t_nbr *new_node);
-t_nbr    *getlast_node(t_nbr *head);
-void	print_list(t_nbr *head);
-void	remove_node(t_nbr **head, t_nbr *target);
-void	new_head(t_nbr **oldhead, t_nbr *newhead);
+//---- PUSH SWAP UTILS -----//
+
+int		bigest_nbr(t_nbr *head);
+int		small_nbr(t_nbr *head);
+// int		get_index(t_nbr *head, int nbr);
+int		get_pos(t_nbr *head, int nbr);
+int		stack_lenght(t_nbr *head);
+void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index);
+
+//---- SORTING FUNCTIONS -----//
+
 
 
 #endif
