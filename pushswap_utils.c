@@ -43,20 +43,6 @@ int		get_pos(t_nbr *head, int nbr)
 	return (pos);
 }
 
-// int		get_index(t_nbr *head, int nbr)
-// {
-//     int     pos;
-
-//     pos = 0;
-//     while (head->next != NULL)
-//     {
-//         if(head->nbr == nbr)
-//             return(pos);
-//         head = head->next;
-//     }
-//     return (pos);
-// }
-
 int		bigest_nbr(t_nbr *head)
 {
 	int		nbr;

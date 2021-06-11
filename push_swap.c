@@ -69,15 +69,38 @@ void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
 		sort_five(stack_a, stack_b);
 }
 
-void	sort_onehundred(t_nbr **stack_a, t_nbr **stack_b)
+int	inc(int range, int st_lent)
 {
-	(void)stack_a;
-	(void)stack_b;
+	int add;
+
+	add = st_lent / 6;
+	if (st_lent > 150)
+		add = st_lent / 12;
+	range += add;
+	if (range > st_lent)
+		range = st_lent;
+	return (range);
 }
+
+void	sort_onehundred(t_nbr **head_a, t_nbr **head_b)
+{
+	(void)head_b;
+	int		range;
+	int		*buff;
+
+	buff = ft_calloc(sizeof(int), 100);
+	range = stack_lenght(*head_a) / 6;
+	while (range < 100)
+	{
+		range += inc(range, stack_lenght(*head_a));
+	}
+}
+
+
 void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
 {
-	(void)stack_a;
-	(void)stack_b;
+	if (stack_lenght(*stack_a) == 100)
+		sort_onehundred(stack_a, stack_b);
 }
 
 int     main(int argc, char **argv)
@@ -93,9 +116,9 @@ int     main(int argc, char **argv)
 		exit_error(1);
     while (++i < argc)
         add_node(&stack_a, init_node(ft_atoi(argv[i])));
-	printf("---------------------------------\n");
-	printf("Befor :\n");
-	print_list(stack_a);
+	// printf("---------------------------------\n");
+	// printf("Befor :\n");
+	// print_list(stack_a);
 	if (stack_lenght(stack_a) > 1)
 	{
 		if (stack_lenght(stack_a) <= 5)
@@ -103,11 +126,9 @@ int     main(int argc, char **argv)
 		else if (stack_lenght(stack_a) > 5)
 			sort_bigstack(&stack_a, &stack_b);
 	}
-	// int test = stack_lenght(stack_b);
-	// printf("===========>%d\n", test);
-	printf("---------------------------------\n");
-	printf("After :\n");
-	print_list(stack_a);
-	printf("---------------------------------\n");
+	// printf("---------------------------------\n");
+	// printf("After :\n");
+	// print_list(stack_a);
+	// printf("---------------------------------\n");
     return (0);
 }
