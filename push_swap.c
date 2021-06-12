@@ -69,31 +69,127 @@ void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
 		sort_five(stack_a, stack_b);
 }
 
-int	inc(int range, int st_lent)
+void	fill_buff(t_nbr *head, int **buff)
 {
-	int add;
+	int		i;
 
-	add = st_lent / 6;
-	if (st_lent > 150)
-		add = st_lent / 12;
-	range += add;
-	if (range > st_lent)
-		range = st_lent;
-	return (range);
+	i = 0;
+	while (head->next != NULL)
+	{
+		(*buff)[i++] = head->nbr;
+		head = head->next;
+	}
+	(*buff)[i] = head->nbr;
+
 }
+
+void	bubble_sort(int	**buff, int lenght)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (j < lenght - 1)
+	{
+		while (i < lenght - j -1)
+		{
+			if ((*buff)[i] > (*buff)[i + 1])
+			{
+				(*buff)[i] = (*buff)[i] + (*buff)[i + 1];
+				(*buff)[i + 1] = (*buff)[i] - (*buff)[i + 1];
+				(*buff)[i] = (*buff)[i] - (*buff)[i + 1];
+			}
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+}
+
+void	verify_push_a(t_nbr **head_a, t_nbr **head_b, int *buff, int range)
+{
+	int		i;
+	t_nbr 	*tmp_a;
+
+	i = 0;
+	tmp_a = *head_a;
+	while (tmp_a->next != NULL)
+	{
+		while (i < range)
+		{
+			if (tmp_a->nbr == buff[i++])
+			{
+				rotat_push(head_a, head_b, get_pos(*head_a, tmp_a->nbr));
+				break;
+			}
+		}
+		i = 0;
+		tmp_a = tmp_a->next;
+	}
+	while (i < range)
+	{
+		if (tmp_a->nbr == buff[i++])
+		{
+			rotat_push(head_a, head_b, get_pos(*head_a, tmp_a->nbr));
+			break;
+		}
+	}
+}
+
+// void	verify_push_b(t_nbr **head_a, t_nbr **head_b, int *buff, int range)
+// {
+// 	int		i;
+// 	t_nbr 	*tmp_b;
+
+// 	i = 100;
+// 	tmp_b = *head_b;
+// 	while (tmp_b->next != NULL)
+// 	{
+// 		while (i >= range)
+// 		{
+// 			if (tmp_b->nbr == buff[i--])
+// 			{
+// 				rotat_push(head_b, head_a, get_pos(*head_b, tmp_b->nbr));
+// 				break;
+// 			}
+// 		}
+// 		i = 100;
+// 		tmp_b = tmp_b->next;
+// 	}
+// 	while (i >= range)
+// 	{
+// 		if (tmp_b->nbr == buff[i--])
+// 		{
+// 			rotat_push(head_b, head_a, get_pos(*head_b, tmp_b->nbr));
+// 			break;
+// 		}
+// 	}
+// }
 
 void	sort_onehundred(t_nbr **head_a, t_nbr **head_b)
 {
 	(void)head_b;
 	int		range;
 	int		*buff;
+	int		lenght;
 
-	buff = ft_calloc(sizeof(int), 100);
-	range = stack_lenght(*head_a) / 6;
-	while (range < 100)
+	lenght = stack_lenght(*head_a);
+	buff = ft_calloc(sizeof(int), lenght);
+	fill_buff(*head_a, &buff);
+	bubble_sort(&buff, lenght);
+	range = lenght / 6;
+	while (stack_lenght(*head_b) < lenght)
 	{
-		range += inc(range, stack_lenght(*head_a));
+		verify_push_a(head_a, head_b, buff, range);
+		range = inc(range, lenght);
 	}
+	// range = decrement(range, lenght);
+	// while (stack_lenght(*head_a) < lenght)
+	// {
+	// 	verify_push_b(head_a, head_b, buff, range);
+	// 	range = decrement(range, lenght);
+	// }
 }
 
 
@@ -130,5 +226,6 @@ int     main(int argc, char **argv)
 	// printf("After :\n");
 	// print_list(stack_a);
 	// printf("---------------------------------\n");
+	// printf("lenght = %d\n", stack_lenght(stack_a));
     return (0);
 }

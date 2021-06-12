@@ -12,6 +12,30 @@
 
 #include "push_swap.h"
 
+int		decrement(int range, int lenght)
+{
+	int		substract;
+
+	substract = lenght / 6;
+	range -= substract;
+	if (range < 0)
+		range = 0;
+	return (range);
+}
+
+int		inc(int range, int lenght)
+{
+	int		add;
+
+	add = lenght / 6;
+	if (lenght > 150)
+		add = lenght / 12;
+	range += add;
+	if (range > lenght)
+		range = lenght;
+	return (range);
+}
+
 int		stack_lenght(t_nbr *head)
 {
 	int		lenght;
@@ -75,31 +99,31 @@ int		small_nbr(t_nbr *head)
 	return (nbr);
 }
 
-void	rotat_push(t_nbr **head_a, t_nbr **head_b, int pos)
+void	rotat_push(t_nbr **target, t_nbr **dst, int pos)
 {
 	int		middle;
 
-	middle = stack_lenght(*head_a) / 2;
+	middle = stack_lenght(*target) / 2;
 	if (pos > 1)
 	{
 		if (pos <= middle)
 		{
 			while (pos > 1)
 			{
-				rotate_stack(*head_a);
+				rotate_stack(*target);
 				pos--;
 			}
 		}
 		else if (pos > middle)
 		{
-			while (pos <= stack_lenght(*head_a))
+			while (pos <= stack_lenght(*target))
 			{
-				rev_rotate_stack(*head_a);
+				rev_rotate_stack(*target);
 				pos++;
 			}
 			pos = 1;
 		}
 	}
 	if (pos == 1)
-		push_stacktop(head_a, head_b);
+		push_stacktop(target, dst);
 }

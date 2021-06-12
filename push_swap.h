@@ -45,10 +45,11 @@ void	swap_firstwo(t_nbr *head);
 
 int		bigest_nbr(t_nbr *head);
 int		small_nbr(t_nbr *head);
-// int		get_index(t_nbr *head, int nbr);
 int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
 void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index);
+int		inc(int range, int st_lenght);
+int		decrement(int range, int lenght);
 
 //---- SORTING FUNCTIONS -----//
 
