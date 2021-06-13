@@ -45,7 +45,6 @@ void    add_node(t_nbr **head, t_nbr *new_node)
 
 void	free_node(t_nbr *node)
 {
-	// free(node->detls);
 	free(node);
 }
 
@@ -53,14 +52,30 @@ void	free_node(t_nbr *node)
 void	remove_node(t_nbr **head, t_nbr *target)
 {
 	t_nbr *tmp;
-	// t_nbr *left;
-	// t_nbr *right;
+	t_nbr *left;
+	t_nbr *right;
 
 	tmp = *head;
 	if (target == tmp)
 	{
 		(*head) = tmp->next;
 		free_node(tmp);
+	}
+	else
+	{
+		while (tmp->next != NULL)
+		{
+			if (target == tmp->next)
+			{
+				left = tmp;
+				tmp = tmp->next;
+				right = tmp->next;
+				free_node(tmp);
+				left->next = right;
+				break;
+			}
+			tmp = tmp->next;
+		}
 	}
 }
 
@@ -82,3 +97,4 @@ void	print_list(t_nbr *head)
 		printf("nbr == %ld\n", head->nbr);
 	}
 }
+

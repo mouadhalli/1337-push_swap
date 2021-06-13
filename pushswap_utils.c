@@ -71,7 +71,7 @@ int		bigest_nbr(t_nbr *head)
 {
 	int		nbr;
 
-	nbr = 0;
+	nbr = head->nbr;
 	while (head->next != NULL)
 	{
 		if (head->nbr > nbr)
