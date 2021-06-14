@@ -48,12 +48,29 @@ void	free_node(t_nbr *node)
 	free(node);
 }
 
+void	remove_middlast(t_nbr *tmp, t_nbr *target)
+{
+	t_nbr *left;
+	t_nbr *right;
+
+	while (tmp->next != NULL)
+	{
+		if (target == tmp->next)
+		{
+			left = tmp;
+			tmp = tmp->next;
+			right = tmp->next;
+			free_node(tmp);
+			left->next = right;
+			break;
+		}
+		tmp = tmp->next;
+	}
+}
 
 void	remove_node(t_nbr **head, t_nbr *target)
 {
 	t_nbr *tmp;
-	t_nbr *left;
-	t_nbr *right;
 
 	tmp = *head;
 	if (target == tmp)
@@ -62,21 +79,7 @@ void	remove_node(t_nbr **head, t_nbr *target)
 		free_node(tmp);
 	}
 	else
-	{
-		while (tmp->next != NULL)
-		{
-			if (target == tmp->next)
-			{
-				left = tmp;
-				tmp = tmp->next;
-				right = tmp->next;
-				free_node(tmp);
-				left->next = right;
-				break;
-			}
-			tmp = tmp->next;
-		}
-	}
+		remove_middlast(tmp, target);
 }
 
 void	new_head(t_nbr **oldhead, t_nbr *newhead)

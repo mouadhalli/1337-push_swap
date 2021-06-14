@@ -12,22 +12,31 @@
 
 #include "push_swap.h"
 
-int		decrement(int range, int lenght)
+void	exit_error(int stream)
 {
-	int		substract;
-
-	substract = lenght / 6;
-	range -= substract;
-	if (range < 0)
-		range = 0;
-	return (range);
+	ft_putstr_fd("error:\n", stream);
+	exit(-1);
 }
 
-int		inc(int range, int lenght)
+void	fill_buff(t_nbr *head, int **buff)
+{
+	int		i;
+
+	i = 0;
+	while (head->next != NULL)
+	{
+		(*buff)[i++] = head->nbr;
+		head = head->next;
+	}
+	(*buff)[i] = head->nbr;
+
+}
+
+int		inc(int range, int lenght, int divisor)
 {
 	int		add;
 
-	add = lenght / 6;
+	add = lenght / divisor;
 	if (lenght > 150)
 		add = lenght / 12;
 	range += add;
@@ -99,31 +108,36 @@ int		small_nbr(t_nbr *head)
 	return (nbr);
 }
 
-void	rotat_push(t_nbr **target, t_nbr **dst, int pos)
+void	rotat_call(t_nbr **target, int *pos, char **tag, int middle)
 {
-	int		middle;
-
-	middle = stack_lenght(*target) / 2;
-	if (pos > 1)
+	if (*pos <= middle)
 	{
-		if (pos <= middle)
+		while (*pos > 1)
 		{
-			while (pos > 1)
-			{
-				rotate_stack(*target);
-				pos--;
-			}
-		}
-		else if (pos > middle)
-		{
-			while (pos <= stack_lenght(*target))
-			{
-				rev_rotate_stack(*target);
-				pos++;
-			}
-			pos = 1;
+			rotate_stack(*target, tag[0]);
+			*pos--;
 		}
 	}
+	else if (*pos > middle)
+	{
+		while (*pos <= stack_lenght(*target))
+		{
+			rev_rotate_stack(*target, tag[1]);
+			*pos++;
+		}
+		*pos = 1;
+	}
+}
+
+void	rotat_push(t_nbr **target, t_nbr **dst, int pos, char *tag)
+{
+	int		middle;
+	char	**tagname;
+
+	tagname = ft_split(tag, ' ');
+	middle = stack_lenght(*target) / 2;
+	if (pos > 1)
+		rotat_call(target, &pos, tagname, middle);
 	if (pos == 1)
-		push_stacktop(target, dst);
+		push_stacktop(target, dst, tagname[2]);
 }

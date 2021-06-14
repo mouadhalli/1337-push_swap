@@ -32,13 +32,13 @@ void	new_head(t_nbr **oldhead, t_nbr *newhead);
 
 //---- PUSH SWAP ACTIONS -----//
 
-void	push_stacktop(t_nbr	**target, t_nbr **dst);
+void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag);
 void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
-void	rev_rotate_stack(t_nbr *head);
+void	rev_rotate_stack(t_nbr *head, char *tag);
 void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
-void	rotate_stack(t_nbr *head);
+void	rotate_stack(t_nbr *head, char *tag);
 void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b);
-void	swap_firstwo(t_nbr *head);
+void	swap_firstwo(t_nbr *head, char *tag);
 
 
 //---- PUSH SWAP UTILS -----//
@@ -47,9 +47,11 @@ int		bigest_nbr(t_nbr *head);
 int		small_nbr(t_nbr *head);
 int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
-void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index);
-int		inc(int range, int st_lenght);
+void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
+int		inc(int range, int st_lenght, int divisor);
 int		decrement(int range, int lenght);
+void	fill_buff(t_nbr *head, int **buff);
+void	exit_error(int stream);
 
 //---- SORTING FUNCTIONS -----//
 
