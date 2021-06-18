@@ -47,7 +47,7 @@ void	sort_five(t_nbr **head_a, t_nbr **head_b)
 		{
 			sort_tree(*head_a);
 			while (stack_lenght(*head_b) > 0)
-				push_stacktop(head_b, head_a, "pb\n");
+				push_stacktop(head_b, head_a, "pa\n");
 			break;
 		}
 	}
@@ -149,30 +149,32 @@ void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
 	t_nbr	*tmp_a;
 
 	tmp_a = *head_a;
-	lenght = stack_lenght(*head_a) - 1;
-	middle = (lenght / 2);
+	lenght = stack_lenght(*head_a);
+	middle = (lenght / 2) - 1;
 	chunk_len = lenght / divisor;
 	buff = ft_calloc(sizeof(int), lenght);
 	chunk = 1;
 	fill_buff(*head_a, &buff);
 	bubble_sort(&buff, lenght);
+	// printf("%d\n", buff[middle - chunk_calc(chunk_len, 5, lenght, middle * -1)]);
 	while (stack_lenght((*head_a)) > 0)
 	{
 		i = 0;
 		current_len = stack_lenght(*head_a);
 		while (i < current_len)
 		{
-			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght)]
+			// printf("%d\n", tmp_a->nbr);
+			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght, middle * -1)]
 			&& tmp_a->nbr < buff[middle])
 			{
-				push_stacktop(head_a, head_b, "pa");
-				rotate_stack((*head_b), "rrb");
+				push_stacktop(head_a, head_b, "pb\n");
+				rotate_stack((*head_b), "rb\n");
 			}
-			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght)]
+			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght, middle)]
 			&& tmp_a->nbr >= buff[middle])
-				push_stacktop(head_a, head_b, "pa");
+				push_stacktop(head_a, head_b, "pb\n");
 			else
-				rotate_stack((*head_a), "rra");
+				rotate_stack((*head_a), "ra\n");
 			if (current_len > 1)				
 				tmp_a = *head_a;
 			i++;
@@ -185,16 +187,16 @@ void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
 	{
 		nbr = bigest_nbr(*head_b);
 		pos = get_pos(*head_b, nbr);
-		rotat_push(head_b, head_a, pos, "rb\n rrb\n pb\n");
+		rotat_push(head_b, head_a, pos, "rb\n rrb\n pa\n");
 	}
 }
 
 void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
 {
 	if (stack_lenght(*stack_a) <= 100)
-		middpoint_algo(stack_a, stack_b, 6);
+		middpoint_algo(stack_a, stack_b, 8);
 	if (stack_lenght(*stack_a) > 100)
-		middpoint_algo(stack_a, stack_b, 12);
+		middpoint_algo(stack_a, stack_b, 18);
 	// if (stack_lenght(*stack_a) <= 100)
 	// 	sort_onehundred(stack_a, stack_b, 6);
 	// else if (stack_lenght(*stack_a) > 100)

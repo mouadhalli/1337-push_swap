@@ -12,13 +12,18 @@
 
 #include "push_swap.h"
 
-int		chunk_calc(int len, int chunk, int lenght)
+int		chunk_calc(int len, int chunk, int lenght, int m)
 {
 	int		res;
 
 	res = len * chunk;
 	if (res > (lenght / 2))
 		res = lenght / 2;
+	if (m < 0)
+	{
+		if (m + res > 0)
+			res = m * -1;
+	}
 	return (res);
 }
 
