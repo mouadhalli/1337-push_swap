@@ -17,14 +17,14 @@ void	swap_firstwo(t_nbr *head, char *tag)
 	head->nbr = head->nbr + head->next->nbr;
 	head->next->nbr = head->nbr - head->next->nbr;
 	head->nbr = head->nbr - head->next->nbr;
-	// ft_putstr_fd(tag, 1);
+	ft_putstr_fd(tag, 1);
 }
 
 void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
 {
 	swap_firstwo(stack_a, "sa");
 	swap_firstwo(stack_b, "sb");
-	// ft_putstr_fd("ss", 1);
+	ft_putstr_fd("ss", 1);
 }
 
 void	rotate_stack(t_nbr *head, char *tag)
@@ -38,14 +38,14 @@ void	rotate_stack(t_nbr *head, char *tag)
 		head->next->nbr = tmp;
 		head = head->next;
 	}
-	// ft_putstr_fd(tag, 1);
+	ft_putstr_fd(tag, 1);
 }
 
 void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
 	rotate_stack(stack_a, "ra");
 	rotate_stack(stack_b, "rb");
-	// ft_putstr_fd("rr", 1);
+	ft_putstr_fd("rr", 1);
 }
 
 void	rev_rotate_stack(t_nbr *head, char *tag)
@@ -54,27 +54,30 @@ void	rev_rotate_stack(t_nbr *head, char *tag)
 	long		tmp2;
 	t_nbr	*tail;
 
-	tail = getlast_node(head);
-	tmp2 = tail->nbr;
-	tmp = head->next->nbr;
-	head->next->nbr = head->nbr;
-	head->nbr = tmp2;
-	head = head->next;
-	while (head->next != NULL)
+	if (stack_lenght(head) > 1)
 	{
-		tmp2 = head->next->nbr;
-		head->next->nbr = tmp;
-		tmp = tmp2;
+		tail = getlast_node(head);
+		tmp2 = tail->nbr;
+		tmp = head->next->nbr;
+		head->next->nbr = head->nbr;
+		head->nbr = tmp2;
 		head = head->next;
+		while (head->next != NULL)
+		{
+			tmp2 = head->next->nbr;
+			head->next->nbr = tmp;
+			tmp = tmp2;
+			head = head->next;
+		}
 	}
-	// ft_putstr_fd(tag, 1);
+	ft_putstr_fd(tag, 1);
 }
 
 void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
 	rev_rotate_stack(stack_a, "rra");
 	rev_rotate_stack(stack_b, "rrb");
-	// ft_putstr_fd("rrr", 1);
+	ft_putstr_fd("rrr", 1);
 }
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag)
@@ -84,5 +87,5 @@ void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag)
 	else	
 		new_head(dst, init_node((*target)->nbr));
 	remove_node(target, *target);
-	// ft_putstr_fd(tag, 1);
+	ft_putstr_fd(tag, 1);
 }

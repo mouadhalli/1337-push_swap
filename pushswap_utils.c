@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+int		chunk_calc(int len, int chunk, int lenght)
+{
+	int		res;
+
+	res = len * chunk;
+	if (res > (lenght / 2))
+		res = lenght / 2;
+	return (res);
+}
+
 void	exit_error(int stream)
 {
 	ft_putstr_fd("error:\n", stream);
@@ -115,7 +125,7 @@ void	rotat_call(t_nbr **target, int *pos, char **tag, int middle)
 		while (*pos > 1)
 		{
 			rotate_stack(*target, tag[0]);
-			*pos--;
+			(*pos)--;
 		}
 	}
 	else if (*pos > middle)
@@ -123,7 +133,7 @@ void	rotat_call(t_nbr **target, int *pos, char **tag, int middle)
 		while (*pos <= stack_lenght(*target))
 		{
 			rev_rotate_stack(*target, tag[1]);
-			*pos++;
+			(*pos)++;
 		}
 		*pos = 1;
 	}

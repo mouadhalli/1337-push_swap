@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME):
 	@make --no-print-directory -C libft
-	@gcc $(SRC) $(LIBS) -o $(NAME)
+	@gcc $(FLAGS) $(SRC) $(LIBS) -o $(NAME)
 
 clean:
 	@make --no-print-directory -C libft clean

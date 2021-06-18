@@ -135,12 +135,70 @@ void	sort_onehundred(t_nbr **head_a, t_nbr **head_b, int divisor)
 	}
 }
 
+//Don't even try to read this function just skip bro
+
+void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
+{
+	int		*buff;
+	int		lenght;
+	int		middle;
+	int		chunk_len;
+	int		chunk;
+	int		current_len;
+	int		i;
+	t_nbr	*tmp_a;
+
+	tmp_a = *head_a;
+	lenght = stack_lenght(*head_a) - 1;
+	middle = (lenght / 2);
+	chunk_len = lenght / divisor;
+	buff = ft_calloc(sizeof(int), lenght);
+	chunk = 1;
+	fill_buff(*head_a, &buff);
+	bubble_sort(&buff, lenght);
+	while (stack_lenght((*head_a)) > 0)
+	{
+		i = 0;
+		current_len = stack_lenght(*head_a);
+		while (i < current_len)
+		{
+			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght)]
+			&& tmp_a->nbr < buff[middle])
+			{
+				push_stacktop(head_a, head_b, "pa");
+				rotate_stack((*head_b), "rrb");
+			}
+			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght)]
+			&& tmp_a->nbr >= buff[middle])
+				push_stacktop(head_a, head_b, "pa");
+			else
+				rotate_stack((*head_a), "rra");
+			if (current_len > 1)				
+				tmp_a = *head_a;
+			i++;
+		}
+		chunk++;
+	}
+	int		nbr = 0;
+	int		pos = 0;
+	while (stack_lenght(*head_b) > 0)
+	{
+		nbr = bigest_nbr(*head_b);
+		pos = get_pos(*head_b, nbr);
+		rotat_push(head_b, head_a, pos, "rb\n rrb\n pb\n");
+	}
+}
+
 void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
 {
 	if (stack_lenght(*stack_a) <= 100)
-		sort_onehundred(stack_a, stack_b, 6);
-	else if (stack_lenght(*stack_a) > 100)
-		sort_onehundred(stack_a, stack_b, 12);
+		middpoint_algo(stack_a, stack_b, 6);
+	if (stack_lenght(*stack_a) > 100)
+		middpoint_algo(stack_a, stack_b, 12);
+	// if (stack_lenght(*stack_a) <= 100)
+	// 	sort_onehundred(stack_a, stack_b, 6);
+	// else if (stack_lenght(*stack_a) > 100)
+	// 	sort_onehundred(stack_a, stack_b, 12);
 }
 
 void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
@@ -176,10 +234,10 @@ int     main(int argc, char **argv)
 		else if (stack_lenght(stack_a) > 5)
 			sort_bigstack(&stack_a, &stack_b);
 	}
-	printf("---------------------------------\n");
-	printf("After :\n");
-	print_list(stack_a);
-	printf("---------------------------------\n");
+	// printf("---------------------------------\n");
+	// printf("After :\n");
+	// print_list(stack_a);
+	// printf("---------------------------------\n");
 	// printf("lenght = %d\n", stack_lenght(stack_b));
     return (0);
 }
