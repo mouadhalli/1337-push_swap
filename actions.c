@@ -24,7 +24,7 @@ void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
 {
 	swap_firstwo(stack_a, "sa");
 	swap_firstwo(stack_b, "sb");
-	ft_putstr_fd("ss\n", 1);
+	ft_putstr_fd("ss", 1);
 }
 
 void	rotate_stack(t_nbr *head, char *tag)
@@ -45,7 +45,7 @@ void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
 	rotate_stack(stack_a, "ra");
 	rotate_stack(stack_b, "rb");
-	ft_putstr_fd("rr\n", 1);
+	ft_putstr_fd("rr", 1);
 }
 
 void	rev_rotate_stack(t_nbr *head, char *tag)
@@ -75,9 +75,9 @@ void	rev_rotate_stack(t_nbr *head, char *tag)
 
 void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
 {
-	rev_rotate_stack(stack_a, "rra\n");
-	rev_rotate_stack(stack_b, "rrb\n");
-	ft_putstr_fd("rrr\n", 1);
+	rev_rotate_stack(stack_a, "rra");
+	rev_rotate_stack(stack_b, "rrb");
+	ft_putstr_fd("rrr", 1);
 }
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag)

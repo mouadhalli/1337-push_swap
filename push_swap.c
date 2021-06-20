@@ -47,7 +47,7 @@ void	sort_five(t_nbr **head_a, t_nbr **head_b)
 		{
 			sort_tree(*head_a);
 			while (stack_lenght(*head_b) > 0)
-				push_stacktop(head_b, head_a, "pa\n");
+				push_stacktop(head_b, head_a, "pb\n");
 			break;
 		}
 	}
@@ -137,6 +137,47 @@ void	sort_onehundred(t_nbr **head_a, t_nbr **head_b, int divisor)
 
 //Don't even try to read this function just skip bro
 
+void	check_npush(t_nbr **head_a, t_nbr **head_b, int *buff, int bignbr)
+{
+	while (1)
+	{
+		if ((*head_b)->nbr == buff[bignbr])
+		{
+			push_stacktop(head_b, head_a, "pa\n");
+			break;
+		}
+		else if ((*head_b)->nbr == buff[bignbr - 1])
+			push_stacktop(head_b, head_a, "pa\n");
+		else if ((*head_b)->nbr == buff[bignbr - 2])
+		{
+			push_stacktop(head_b, head_a, "pa\n");
+			rotate_stack(*head_a, "rrb\n");
+		}
+		else
+		{
+			if (get_pos(*head_b, buff[bignbr]) > stack_lenght(*head_b))
+				rotate_stack(*head_b, "rrb\n");
+			else
+				rev_rotate_stack(*head_b, "rb\n");
+		}
+	}
+}
+
+void	fill_back(t_nbr **head_a, t_nbr **head_b, int *buff)
+{
+	int		bignbr;
+
+	while (stack_lenght(*head_b) > 0)
+	{
+		bignbr = get_nbrank(buff, bigest_nbr(*head_b), stack_lenght(*head_b));
+		check_npush(head_a, head_b, buff, bignbr);
+		if ((*head_a)->next && (*head_a)->nbr > (*head_a)->next->nbr)
+			swap_firstwo((*head_a), "sb\n");
+		if (getlast_node(*head_a)->nbr < buff[bignbr])
+			rev_rotate_stack(*head_a, "ra\n");
+	}
+}
+
 void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
 {
 	int		*buff;
@@ -156,47 +197,38 @@ void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
 	chunk = 1;
 	fill_buff(*head_a, &buff);
 	bubble_sort(&buff, lenght);
-	// printf("%d\n", buff[middle - chunk_calc(chunk_len, 5, lenght, middle * -1)]);
 	while (stack_lenght((*head_a)) > 0)
 	{
 		i = 0;
 		current_len = stack_lenght(*head_a);
 		while (i < current_len)
 		{
-			// printf("%d\n", tmp_a->nbr);
-			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght, middle * -1)]
+			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght, -1)]
 			&& tmp_a->nbr < buff[middle])
 			{
-				push_stacktop(head_a, head_b, "pb\n");
-				rotate_stack((*head_b), "rb\n");
+				push_stacktop(head_a, head_b, "pa\n");
+				rotate_stack((*head_b), "rrb\n");
 			}
-			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght, middle)]
+			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght, 1)]
 			&& tmp_a->nbr >= buff[middle])
-				push_stacktop(head_a, head_b, "pb\n");
+				push_stacktop(head_a, head_b, "pa\n");
 			else
-				rotate_stack((*head_a), "ra\n");
+				rotate_stack((*head_a), "rra\n");
 			if (current_len > 1)				
 				tmp_a = *head_a;
 			i++;
 		}
 		chunk++;
 	}
-	int		nbr = 0;
-	int		pos = 0;
-	while (stack_lenght(*head_b) > 0)
-	{
-		nbr = bigest_nbr(*head_b);
-		pos = get_pos(*head_b, nbr);
-		rotat_push(head_b, head_a, pos, "rb\n rrb\n pa\n");
-	}
+	fill_back(head_a, head_b, buff);
 }
 
 void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
 {
 	if (stack_lenght(*stack_a) <= 100)
-		middpoint_algo(stack_a, stack_b, 8);
+		middpoint_algo(stack_a, stack_b, 6);
 	if (stack_lenght(*stack_a) > 100)
-		middpoint_algo(stack_a, stack_b, 18);
+		middpoint_algo(stack_a, stack_b, 12);
 	// if (stack_lenght(*stack_a) <= 100)
 	// 	sort_onehundred(stack_a, stack_b, 6);
 	// else if (stack_lenght(*stack_a) > 100)

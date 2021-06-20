@@ -52,7 +52,8 @@ int		inc(int range, int st_lenght, int divisor);
 int		decrement(int range, int lenght);
 void	fill_buff(t_nbr *head, int **buff);
 void	exit_error(int stream);
-int		chunk_calc(int len, int chunk, int lenght, int m);
+int		chunk_calc(int len, int chunk, int lenght, int sign);
+int		get_nbrank(int *buff, int nbr, int lenght);
 
 //---- SORTING FUNCTIONS -----//
 

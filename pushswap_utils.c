@@ -12,18 +12,28 @@
 
 #include "push_swap.h"
 
-int		chunk_calc(int len, int chunk, int lenght, int m)
+int		get_nbrank(int *buff, int nbr, int lenght)
+{
+	int		i;
+
+	i = -1;
+	while (++i < lenght)
+	{
+		if (nbr == buff[i])
+			return (i);
+	}
+	return (i);
+}
+
+int		chunk_calc(int len, int chunk, int lenght, int sign)
 {
 	int		res;
 
 	res = len * chunk;
 	if (res > (lenght / 2))
 		res = lenght / 2;
-	if (m < 0)
-	{
-		if (m + res > 0)
-			res = m * -1;
-	}
+	if (sign == -1 && res == (lenght / 2))
+		res -= 1;
 	return (res);
 }
 
@@ -44,7 +54,6 @@ void	fill_buff(t_nbr *head, int **buff)
 		head = head->next;
 	}
 	(*buff)[i] = head->nbr;
-
 }
 
 int		inc(int range, int lenght, int divisor)
