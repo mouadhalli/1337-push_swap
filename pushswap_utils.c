@@ -54,6 +54,7 @@ void	fill_buff(t_nbr *head, int **buff)
 		head = head->next;
 	}
 	(*buff)[i] = head->nbr;
+
 }
 
 int		inc(int range, int lenght, int divisor)

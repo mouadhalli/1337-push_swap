@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pushswap
+NAME = push_swap
 
-SRC = push_swap.c
+SRC = push_swap.c actions.c node_utils.c pushswap_utils.c
 
 FLAGS = -Wall -Wextra -Werror -g
 
@@ -23,14 +23,14 @@ LIBS = libft/libft.a \
 all: $(NAME)
 
 $(NAME):
-	@make --no-print-directory -C libft
-	@gcc $(FLAGS) $(SRC) $(LIBS) -o $(NAME)
+	@make -C libft
+	@gcc -g $(MOMALA7AT) $(SRC) $(LIBS) -o $(NAME)
 
 clean:
-	@make --no-print-directory -C libft clean
+	@make -C libft clean
 
 fclean: clean
-	@make --no-print-directory -C libft fclean
+	@make -C libft fclean
 	@rm -f $(NAME)
 
 re:	fclean all
