@@ -12,6 +12,29 @@
 
 #include "push_swap.h"
 
+int		get_index(int lenght, int divisor, int chunk , int sign)
+{
+	int		middle;
+	int		len;
+	int		ret;
+
+	middle = (lenght / 2) -1;
+	len = lenght / divisor;
+	if (sign == -1)
+		ret = middle - chunk_calc(len, chunk, lenght, -1);
+	else
+		ret = middle + chunk_calc(lenght / divisor, chunk, lenght, 1);
+	return (ret);
+}
+
+int		*init_buff(int *buff, t_nbr *content, int lenght)
+{
+	buff = ft_calloc(sizeof(int), lenght);
+	fill_buff(content, &buff);
+	bubble_sort(&buff, lenght);
+	return (buff);
+}
+
 int		get_nbrank(int *buff, int nbr, int lenght)
 {
 	int		i;

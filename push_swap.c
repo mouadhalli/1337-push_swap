@@ -78,66 +78,9 @@ void	bubble_sort(int	**buff, int lenght)
 	}
 }
 
-void	verify_push(t_nbr **head_a, t_nbr **head_b, int *buff, int range)
-{
-	int		i;
-	int		key;
-	t_nbr 	*tmp_a;
+// AND THIS IS WHAT WE CALL A SPAGHETI CODE
 
-	i = 0;
-	tmp_a = *head_a;
-	while (tmp_a->next != NULL || stack_lenght(*head_b) < range)
-	{
-		key = 0;
-		while (i < range)
-		{
-			if (tmp_a->nbr == buff[i++])
-			{
-				key = 1;
-				rotat_push(head_a, head_b, get_pos(*head_a, tmp_a->nbr), "ra\n rra\n pa\n");
-				if (stack_lenght(*head_b) == range)
-					return ;
-				tmp_a = *head_a;
-				break ;
-			}
-		}
-		i = 0;
-		if (key == 0)
-			tmp_a = tmp_a->next;
-	}
-}
-
-void	sort_onehundred(t_nbr **head_a, t_nbr **head_b, int divisor)
-{
-	int		range;
-	int		*buff;
-	int		lenght;
-	int		nbr;
-	int		pos;
-
-	nbr = 0;
-	pos = 0;
-	lenght = stack_lenght(*head_a);
-	buff = ft_calloc(sizeof(int), lenght);
-	fill_buff(*head_a, &buff);
-	bubble_sort(&buff, lenght);
-	range = lenght / divisor;
-	while (stack_lenght(*head_b) < lenght)
-	{
-		verify_push(head_a, head_b, buff, range);
-		range = inc(range, lenght, divisor);
-	}
-	while (stack_lenght(*head_a) < lenght)
-	{
-		nbr = bigest_nbr(*head_b);
-		pos = get_pos(*head_b, nbr);
-		rotat_push(head_b, head_a, pos, "rb\n rrb\n pb\n");
-	}
-}
-
-//Don't even try to read this function just skip bro
-
-void	check_npush_right(t_nbr **head_a, t_nbr **head_b, int *buff, int bignbr)
+void	check_npush(t_nbr **head_a, t_nbr **head_b, int *buff, int bignbr)
 {
 	while (1)
 	{
@@ -154,139 +97,111 @@ void	check_npush_right(t_nbr **head_a, t_nbr **head_b, int *buff, int bignbr)
 			rotate_stack(*head_a, "ra\n");
 		}
 		else
-			rev_rotate_stack(*head_b, "rrb\n");
+			if (get_pos(*head_b, buff[bignbr]) > stack_lenght(*head_b) / 2)
+				rev_rotate_stack(*head_b, "rrb\n");
+			else
+				rotate_stack(*head_b, "rb\n");
 	}
 }
 
-void	check_npush_left(t_nbr **head_a, t_nbr **head_b, int *buff, int bignbr)
-{
-	while (1)
-	{
-		if ((*head_b)->nbr == buff[bignbr])
-		{
-			push_stacktop(head_b, head_a, "pa\n");
-			break;
-		}
-		else if ((*head_b)->nbr == buff[bignbr - 1])
-			push_stacktop(head_b, head_a, "pa\n");
-		else if ((*head_b)->nbr == buff[bignbr - 2])
-		{
-			push_stacktop(head_b, head_a, "pa\n");
-			rotate_stack(*head_a, "ra\n");
-		}
-		else
-			rotate_stack(*head_b, "rb\n");
-	}
-}
-
-void	fill_back(t_nbr **head_a, t_nbr **head_b, int *buff)
+void	fill_back(t_stack **stack)
 {
 	int		bignbr;
+	int		lenght;
 
-	while (stack_lenght(*head_b) > 0)
+	while (stack_lenght((*stack)->b) > 0)
 	{
-		bignbr = get_nbrank(buff, bigest_nbr(*head_b), stack_lenght(*head_b));
-		if (get_pos(*head_b, buff[bignbr]) > stack_lenght(*head_b) / 2)
-			check_npush_right(head_a, head_b, buff, bignbr);
-		else if (get_pos(*head_b, buff[bignbr]) <= stack_lenght(*head_b) / 2)
-			check_npush_left(head_a, head_b, buff, bignbr);
-		if ((*head_a)->next && (*head_a)->nbr > (*head_a)->next->nbr)
-			swap_firstwo((*head_a), "sa\n");
-		if (getlast_node(*head_a)->nbr < buff[bignbr])
-			rev_rotate_stack(*head_a, "rra\n");
+		lenght = stack_lenght((*stack)->b);
+		bignbr = get_nbrank((*stack)->tab, bigest_nbr((*stack)->b),
+			stack_lenght((*stack)->b));
+		check_npush(&(*stack)->a, &(*stack)->b, (*stack)->tab, bignbr);
+		if ((*stack)->a->next && (*stack)->a->nbr > (*stack)->a->next->nbr)
+			swap_firstwo((*stack)->a, "sa\n");
+		if (getlast_node((*stack)->a)->nbr < (*stack)->tab[bignbr])
+			rev_rotate_stack((*stack)->a, "rra\n");
 	}
 }
 
-void	middpoint_algo(t_nbr **head_a, t_nbr **head_b, int divisor)
+void	push_rotate(t_stack **stack, int lenght, int div, int chunk)
 {
-	int		*buff;
-	int		lenght;
-	int		middle;
-	int		chunk_len;
-	int		chunk;
-	int		current_len;
-	int		i;
-	t_nbr	*tmp_a;
 
-	tmp_a = *head_a;
-	lenght = stack_lenght(*head_a);
-	middle = (lenght / 2) - 1;
-	chunk_len = lenght / divisor;
-	buff = ft_calloc(sizeof(int), lenght);
-	chunk = 1;
-	fill_buff(*head_a, &buff);
-	bubble_sort(&buff, lenght);
-	while (stack_lenght((*head_a)) > 0)
+	if ((*stack)->a->nbr >= (*stack)->tab[get_index(lenght, div, chunk, -1)]
+	&& ((*stack)->a->nbr < (*stack)->tab[(lenght / 2) - 1]))
 	{
-		i = 0;
-		current_len = stack_lenght(*head_a);
-		while (i < current_len)
-		{
-			if (tmp_a->nbr >= buff[middle - chunk_calc(chunk_len, chunk, lenght, -1)]
-			&& tmp_a->nbr < buff[middle])
-			{
-				push_stacktop(head_a, head_b, "pb\n");
-				rotate_stack((*head_b), "rb\n");
-			}
-			else if (tmp_a->nbr <= buff[middle + chunk_calc(chunk_len, chunk, lenght, 1)]
-			&& tmp_a->nbr >= buff[middle])
-				push_stacktop(head_a, head_b, "pb\n");
-			else
-				rotate_stack((*head_a), "ra\n");
-			if (current_len > 1)				
-				tmp_a = *head_a;
-			i++;
-		}
+		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
+		rotate_stack((*stack)->b, "rb\n");
+	}
+	else if ((*stack)->a->nbr <= (*stack)->tab[get_index(lenght, div, chunk, 1)]
+	&& ((*stack)->a->nbr >= (*stack)->tab[(lenght / 2) - 1]))
+		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
+	else
+		rotate_stack((*stack)->a, "ra\n");
+}
+
+void	middpoint_algo(t_stack **stack, int divisor)
+{
+	int		lenght;
+	int		current_len;
+	int		chunk;
+	int		i;
+
+	lenght = stack_lenght((*stack)->a);
+	chunk = 1;
+	(*stack)->tab = init_buff((*stack)->tab, (*stack)->a, lenght);
+	while (stack_lenght((*stack)->a) > 0)
+	{
+		i = -1;
+		current_len = stack_lenght((*stack)->a);
+		while (++i < current_len)
+			push_rotate(stack, lenght, divisor, chunk);
 		chunk++;
 	}
-	fill_back(head_a, head_b, buff);
+	fill_back(stack);
 }
 
-void	sort_bigstack(t_nbr **stack_a, t_nbr **stack_b)
+void	sort_bigstack(t_stack **stack)
 {
-	if (stack_lenght(*stack_a) <= 100)
-		middpoint_algo(stack_a, stack_b, 6);
-	if (stack_lenght(*stack_a) > 100)
-		middpoint_algo(stack_a, stack_b, 18);
+	if (stack_lenght((*stack)->a) <= 100)
+		middpoint_algo(stack, 6);
+	if (stack_lenght((*stack)->a) > 100)
+		middpoint_algo(stack, 18);
 }
 
-void	sort_smallstack(t_nbr **stack_a, t_nbr **stack_b)
+void	sort_smallstack(t_stack **stack)
 {
-	(void)stack_b;
-
-	if (stack_lenght(*stack_a) <= 3)
-		sort_tree(*stack_a);
-	else if (stack_lenght(*stack_a) <= 5)
-		sort_five(stack_a, stack_b);
+	if (stack_lenght((*stack)->a) <= 3)
+		sort_tree((*stack)->a);
+	else if (stack_lenght((*stack)->a) <= 5)
+		sort_five(&(*stack)->a, &(*stack)->b);
 }
 
 int     main(int argc, char **argv)
 {
-    t_nbr *stack_a;
-    t_nbr *stack_b;
+	t_stack		*stack;
     int     i;
 
     i = 0;
-    stack_a = NULL;
-    stack_b = NULL;
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack->a = NULL;
+	stack->b = NULL;
 	if (argc < 2)
 		exit_error(1);
     while (++i < argc)
-        add_node(&stack_a, init_node(ft_atoi(argv[i])));
+        add_node(&stack->a, init_node(ft_atoi(argv[i])));
 	// printf("---------------------------------\n");
 	// printf("Befor :\n");
 	// print_list(stack_a);
-	if (stack_lenght(stack_a) > 1)
+	if (stack_lenght(stack->a) > 1)
 	{
-		if (stack_lenght(stack_a) <= 5)
-			sort_smallstack(&stack_a, &stack_b);
-		else if (stack_lenght(stack_a) > 5)
-			sort_bigstack(&stack_a, &stack_b);
+		if (stack_lenght(stack->a) <= 5)
+			sort_smallstack(&stack);
+		else if (stack_lenght(stack->a) > 5)
+			sort_bigstack(&stack);
 	}
 	// printf("---------------------------------\n");
 	// printf("After :\n");
-	// print_list(stack_a);
+	// print_list(stack->a);
 	// printf("---------------------------------\n");
-	// printf("lenght = %d\n", stack_lenght(stack_b));
+	// printf("lenght = %d\n", stack_lenght(stack->a));
     return (0);
 }

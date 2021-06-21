@@ -17,9 +17,16 @@
 
 typedef	struct	s_nbr
 {
-	long           nbr;
-    struct  s_nbr *next;
+	long			nbr;
+    struct s_nbr	*next;
 }				t_nbr;
+
+typedef	struct	s_stack
+{
+	t_nbr	*a;
+    t_nbr 	*b;
+	int		*tab;
+}				t_stack;
 
 //---- LINKED LISTS FUNCTIONS -----//
 
@@ -54,9 +61,11 @@ void	fill_buff(t_nbr *head, int **buff);
 void	exit_error(int stream);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
+int     *init_buff(int *buff, t_nbr *content, int lenght);
+int		get_index(int lenght, int divisor, int chunk , int sign);
 
 //---- SORTING FUNCTIONS -----//
-
+void	bubble_sort(int	**buff, int lenght);
 
 
 #endif
