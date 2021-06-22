@@ -12,9 +12,9 @@
 
 NAME = push_swap
 
-SRC = push_swap.c actions.c node_utils.c pushswap_utils.c
+SRC = push_swap.c actions.c node_utils.c pushswap_utils.c error_management.c error_management_utils.c
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 MOMALA7AT = -fsanitize=address
 
@@ -23,14 +23,14 @@ LIBS = libft/libft.a \
 all: $(NAME)
 
 $(NAME):
-	@make --no-print-directory -C libft
-	@gcc $(MOMALA7AT) $(SRC) $(LIBS) -g -o $(NAME)
+	@make -C libft
+	@gcc $(SRC) $(FLAGS) $(MOMALA7AT) $(LIBS) -o $(NAME)
 
 clean:
-	@make --no-print-directory -C libft clean
+	@make -C libft clean
 
 fclean: clean
-	@make --no-print-directory -C libft fclean
+	@make -C libft fclean
 	@rm -f $(NAME)
 
 re:	fclean all
