@@ -175,16 +175,30 @@ void	sort_smallstack(t_stack **stack)
 		sort_five(&(*stack)->a, &(*stack)->b);
 }
 
-void	list_constructor(t_stack *stack, int argc, char **argv)
+t_stack *stack_constructor(t_stack *stack, int argc, char **argv)
 {
 	int		i;
 
 	i = 0;
-	filter_input(argv);
+	// filter_input(argv);
+	stack = (t_stack *)malloc(sizeof(t_stack));
 	stack->a = NULL;
 	stack->b = NULL;
 	while (++i < argc)
+	{
+		if (!is_nbr(argv[i]) || !is_int(argv[i]))
+            exit_error(2);
 		add_node(&stack->a, init_node(ft_atoi(argv[i])));
+	}
+	return (stack);
+}
+
+void	stack_checker(t_stack *stack)
+{
+	if (is_sorted(stack->a))
+		exit(1);
+	if (is_duplicated(stack->a))
+		exit_error(2);
 }
 
 int     main(int argc, char **argv)
@@ -193,9 +207,9 @@ int     main(int argc, char **argv)
     int     i;
 
     i = 0;
-	(void)argc;
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	list_constructor(stack, argc, argv);
+	stack = NULL;
+	stack = stack_constructor(stack, argc, argv);
+	stack_checker(stack);
     // while (++i < argc)
         // add_node(&stack->a, init_node(ft_atoi(argv[i])));
 	// printf("---------------------------------\n");
@@ -208,10 +222,10 @@ int     main(int argc, char **argv)
 	// 	else if (stack_lenght(stack->a) > 5)
 	// 		sort_bigstack(&stack);
 	// }
-	// printf("---------------------------------\n");
-	// printf("After :\n");
-	// print_list(stack->a);
-	// printf("---------------------------------\n");
+	printf("---------------------------------\n");
+	printf("After :\n");
+	print_list(stack->a);
+	printf("---------------------------------\n");
 	// printf("lenght = %d\n", stack_lenght(stack->a));
     return (0);
 }

@@ -68,11 +68,9 @@ void	bubble_sort(int	**buff, int lenght);
 
 //---- ERROR MANAGEMENT FUNCITONS ---//
 
-void    filter_input(char **argv);
-
-//---- ERROR MANAGEMENT UTILS FUNCITONS ---//
-
 int		is_nbr(char *str);
-
+int		is_int(char *nbr);
+int		is_sorted(t_nbr *head);
+int		is_duplicated(t_nbr *head);
 
 #endif
