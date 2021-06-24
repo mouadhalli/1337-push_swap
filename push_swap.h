@@ -36,6 +36,7 @@ t_nbr    *getlast_node(t_nbr *head);
 void	print_list(t_nbr *head);
 void	remove_node(t_nbr **head, t_nbr *target);
 void	new_head(t_nbr **oldhead, t_nbr *newhead);
+void	free_list(t_nbr **list);
 
 //---- PUSH SWAP ACTIONS -----//
 

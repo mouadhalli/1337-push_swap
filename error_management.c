@@ -57,6 +57,19 @@ int	is_sorted(t_nbr *head)
 	return (1);
 }
 
+int	find_dup(t_nbr *tmp, int nbr, int counter)
+{
+	while (tmp->next != NULL)
+	{
+		if (tmp->nbr == nbr)
+			counter++;
+		tmp = tmp->next;
+	}
+	if (tmp->nbr == nbr)
+		counter++;
+	return (counter);
+}
+
 int	is_duplicated(t_nbr *head)
 {
 	t_nbr	*tmp1;
@@ -64,19 +77,19 @@ int	is_duplicated(t_nbr *head)
 	int		counter;
 
 	tmp1 = head;
-	while(tmp1 != NULL)
+	while(tmp1->next != NULL)
 	{
 		tmp2 = tmp1;
 		counter = 0;
-		while (tmp2 != NULL && tmp2->next != NULL)
-		{
-			if (tmp1->nbr == tmp2->nbr)
-				counter += 1;
-			tmp2 = tmp2->next;
-		}
+		counter = find_dup(tmp2, tmp1->nbr, counter);
 		if (counter > 1)
 			return (1);
 		tmp1 = tmp1->next;
 	}
+	tmp2 = tmp1;
+	counter = 0;
+	counter = find_dup(tmp2, tmp1->nbr, counter);
+	if (counter > 1)
+		return (1);
 	return (0);
 }

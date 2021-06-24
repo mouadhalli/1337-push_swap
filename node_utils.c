@@ -101,3 +101,15 @@ void	print_list(t_nbr *head)
 	}
 }
 
+void	free_list(t_nbr **list)
+{
+	t_nbr	*tmp;
+
+	while (*list)
+	{
+		tmp = (*list)->next;
+		free_node(*list);
+		*list = tmp;
+	}
+	*list = NULL;
+}

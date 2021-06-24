@@ -15,14 +15,10 @@
 int		main(int argc, char **argv)
 {
 	t_stack		*stack;
-	int			i;
 
-	i = 0;
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	stack->a = NULL;
-	stack->b = NULL;
-	while (++i < argc)
-		add_node(&stack->a, init_node(ft_atoi(argv[i])));
+	stack = NULL;
+	stack = stack_constructor(stack, argc, argv);
+	stack_checker(stack);
 	printf("---------------------------------\n");
 	printf("After :\n");
 	print_list(stack->a);
