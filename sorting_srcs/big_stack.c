@@ -45,15 +45,23 @@ void	fill_back(t_stack **stack)
 
 void	push_rotate(t_stack **stack, int lenght, int div, int chunk)
 {
+	int		middle;
+	int		nbr;
+	int		right_middle;
+	int		left_middle;
 
-	if ((*stack)->a->nbr >= (*stack)->arr[get_index(lenght, div, chunk, -1)]
-	&& ((*stack)->a->nbr < (*stack)->arr[(lenght / 2) - 1]))
+	right_middle = get_index(lenght, div, chunk, -1);
+	left_middle = get_index(lenght, div, chunk, 1);
+	middle = lenght / 2 - 1;
+	nbr = (*stack)->a->nbr;
+	if (nbr >= (*stack)->arr[right_middle]
+	&& (nbr < (*stack)->arr[middle]))
 	{
 		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
 		rotate_stack((*stack)->b, "rb\n");
 	}
-	else if ((*stack)->a->nbr <= (*stack)->arr[get_index(lenght, div, chunk, 1)]
-	&& ((*stack)->a->nbr >= (*stack)->arr[(lenght / 2) - 1]))
+	else if (nbr <= (*stack)->arr[left_middle]
+	&& (nbr >= (*stack)->arr[middle]))
 		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
 	else
 		rotate_stack((*stack)->a, "ra\n");
