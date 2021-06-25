@@ -11,26 +11,39 @@
 # **************************************************************************** #
 
 NAME = push_swap
+BONUS_NAME = checker
 
-SRC = push_swap.c actions.c node_utils.c pushswap_utils.c error_management.c error_management_utils.c
+SRC = push_swap.c buff_utils.c error_utils.c stack_constructor.c stack_destructor.c \
+		Actions/push_stack.c Actions/rotate_stack.c Actions/swap_stack.c Actions/actions_utils.c\
+		sorting_srcs/big_stack.c sorting_srcs/small_stack.c sorting_srcs/sorting_utils.c
 
-FLAGS = -Wall -Wextra -Werror -g
+BONUS_SRC = checker.c buff_utils.c error_utils.c stack_constructor.c stack_destructor.c Actions/push_stack.c \
+		Actions/push_stack.c Actions/rotate_stack.c Actions/swap_stack.c Actions/actions_utils.c\
+		sorting_srcs/big_stack.c sorting_srcs/small_stack.c sorting_srcs/sorting_utils.c
+
+FLAGS = -Wall -Wextra -Werror
 
 MOMALA7AT = -fsanitize=address
 
 LIBS = libft/libft.a \
 
 all: $(NAME)
+bonus: $(BONUS_NAME)
 
 $(NAME):
-	@make -C libft
-	@gcc $(SRC) $(FLAGS) $(MOMALA7AT) $(LIBS) -o $(NAME)
+	@make --no-print-directory -C libft
+	@gcc $(MOMALA7AT) $(SRC) $(LIBS) -g -o $(NAME)
+
+$(BONUS_NAME):
+	@make --no-print-directory -C libft
+	@gcc $(MOMALA7AT) $(BONUS_SRC) $(LIBS) -g -o $(BONUS_NAME)
 
 clean:
-	@make -C libft clean
+	@make --no-print-directory -C libft clean
 
 fclean: clean
-	@make -C libft fclean
+	@make --no-print-directory -C libft fclean
 	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 
 re:	fclean all

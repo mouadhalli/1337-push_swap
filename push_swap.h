@@ -25,7 +25,7 @@ typedef	struct	s_stack
 {
 	t_nbr	*a;
     t_nbr 	*b;
-	int		*tab;
+	int		*arr;
 }				t_stack;
 
 //---- LINKED LIST FUNCTIONS -----//
@@ -57,7 +57,7 @@ int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
 void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
 void	fill_buff(t_nbr *head, int **buff);
-void	exit_error(int stream);
+void	exit_error(int stream, t_stack *stack, int key);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
 int     *init_buff(int *buff, t_nbr *content, int lenght);
@@ -73,5 +73,14 @@ int		is_nbr(char *str);
 int		is_int(char *nbr);
 int		is_sorted(t_nbr *head);
 int		is_duplicated(t_nbr *head);
+
+//----------------------------------//
+
+t_stack *stack_constructor(t_stack *stack, int argc, char **argv);
+t_stack	*stack_destructor(t_stack *stack);
+void	 stack_checker(t_stack *stack);
+
+void	sort_smallstack(t_stack **stack);
+void	sort_bigstack(t_stack **stack);
 
 #endif
