@@ -13,13 +13,14 @@
 NAME = push_swap
 BONUS_NAME = checker
 
-SRC = push_swap.c buff_utils.c error_utils.c stack_constructor.c stack_destructor.c \
+SRC = push_swap.c sorting_src/buff_utils.c error_utils.c stack_constructor.c stack_destructor.c \
 		Actions/push_stack.c Actions/rotate_stack.c Actions/swap_stack.c Actions/actions_utils.c\
-		sorting_srcs/big_stack.c sorting_srcs/small_stack.c sorting_srcs/sorting_utils.c
+		sorting_src/big_stack.c sorting_src/small_stack.c sorting_src/sorting_utils.c
 
-BONUS_SRC = checker.c buff_utils.c error_utils.c stack_constructor.c stack_destructor.c Actions/push_stack.c \
+BONUS_SRC = checker.c sorting_src/buff_utils.c error_utils.c stack_constructor.c stack_destructor.c \
 		Actions/push_stack.c Actions/rotate_stack.c Actions/swap_stack.c Actions/actions_utils.c\
-		sorting_srcs/big_stack.c sorting_srcs/small_stack.c sorting_srcs/sorting_utils.c
+		sorting_src/big_stack.c sorting_src/small_stack.c sorting_src/sorting_utils.c \
+		GNL/get_next_line.c GNL/get_next_line_utils.c
 
 FLAGS = -Wall -Wextra -Werror
 

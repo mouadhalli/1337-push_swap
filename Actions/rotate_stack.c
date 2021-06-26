@@ -20,33 +20,78 @@ void	rev_rotate_stack(t_nbr *head, char *tag)
 			head = head->next;
 		}
 	}
-	ft_putstr_fd(tag, 1);
+	if (tag)
+		ft_putstr_fd(tag, 1);
 }
 
 void	rotate_stack(t_nbr *head, char *tag)
 {
 	long		tmp;
 
-	tmp = head->nbr;
-	while(head->next != NULL)
+	if (head)
 	{
-		head->nbr = head->next->nbr;
-		head->next->nbr = tmp;
-		head = head->next;
+		tmp = head->nbr;
+		while(head->next != NULL)
+		{
+			head->nbr = head->next->nbr;
+			head->next->nbr = tmp;
+			head = head->next;
+		}
+		if (tag)
+			ft_putstr_fd(tag, 1);
 	}
-	ft_putstr_fd(tag, 1);
 }
 
-void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
+void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key)
 {
-	rev_rotate_stack(stack_a, "rra\n");
-	rev_rotate_stack(stack_b, "rrb\n");
-	ft_putstr_fd("rrr\n", 1);
+	if (stack_a && stack_b)
+	{
+		if (key)
+		{
+			rev_rotate_stack(stack_a, "rra\n");
+			rev_rotate_stack(stack_b, "rrb\n");
+			ft_putstr_fd("rrr\n", 1);
+		}
+		else
+			rev_rotate_stack(stack_a, NULL);
+			rev_rotate_stack(stack_b, NULL);
+	}
 }
 
-void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b)
+void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key)
 {
-	rotate_stack(stack_a, "ra");
-	rotate_stack(stack_b, "rb");
-	ft_putstr_fd("rr\n", 1);
+	if (stack_a && stack_b)
+	{
+		if (key)
+		{
+			rotate_stack(stack_a, "ra\n");
+			rotate_stack(stack_b, "rb\n");
+				ft_putstr_fd("rr\n", 1);
+		}
+		else
+			rotate_stack(stack_a, NULL);
+			rotate_stack(stack_b, NULL);
+	}
+}
+
+void	exec_rotate(t_stack *stack, char *action)
+{
+	if (ft_strlen(action) == 2)
+	{
+		if (action[1] == 'a')
+			rotate_stack(stack->a, NULL);
+		else if (action[1] == 'b')
+			rotate_stack(stack->b, NULL);
+		else if (action[1] == 'r')
+			rotate_ab(stack->a, stack->b, 0);
+	}
+	else if (ft_strlen(action) == 3)
+	{
+		if (action[2] == 'a')
+			rev_rotate_stack(stack->a, NULL);
+		else if (action[2] == 'b')
+			rev_rotate_stack(stack->b, NULL);
+		else if (action[2] == 'r')
+			rev_rotate_ab(stack->a, stack->b, 0);
+	}
 }

@@ -49,6 +49,15 @@ void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag)
 		else	
 			new_head(dst, init_node((*target)->nbr));
 		remove_node(target, *target);
-		ft_putstr_fd(tag, 1);
+		if (tag)
+			ft_putstr_fd(tag, 1);
 	}
+}
+
+void	exec_push(t_stack *stack, char *action)
+{
+	if (action[1] == 'a')
+		push_stacktop(&stack->b, &stack->a, NULL);
+	else if (action[1] == 'b')
+		push_stacktop(&stack->a, &stack->b, NULL);
 }

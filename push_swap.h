@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 #include "libft/libft.h"
+#include "GNL/get_next_line.h"
 
 typedef	struct	s_nbr
 {
@@ -41,12 +42,15 @@ void	free_list(t_nbr **list);
 //---- PUSH SWAP ACTIONS -----//
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag);
-void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
+void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key);
 void	rev_rotate_stack(t_nbr *head, char *tag);
-void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b);
+void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key);
 void	rotate_stack(t_nbr *head, char *tag);
-void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b);
+void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b, int key);
 void	swap_firstwo(t_nbr *head, char *tag);
+void	exec_rotate(t_stack *stack, char *action);
+void	exec_push(t_stack *stack, char *action);
+void	exec_swap(t_stack *stack, char *action);
 
 
 //---- PUSH SWAP UTILS -----//
@@ -56,16 +60,11 @@ int		small_nbr(t_nbr *head);
 int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
 void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
-void	fill_buff(t_nbr *head, int **buff);
 void	exit_error(int stream, t_stack *stack, int key);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
 int     *init_buff(int *buff, t_nbr *content, int lenght);
 int		get_index(int lenght, int divisor, int chunk , int sign);
-
-//---- SORTING FUNCTIONS -----//
-
-void	bubble_sort(int	**buff, int lenght);
 
 //---- ERROR MANAGEMENT FUNCITONS ---//
 

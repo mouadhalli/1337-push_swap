@@ -19,13 +19,33 @@ void	swap_firstwo(t_nbr *head, char *tag)
 		head->nbr = head->nbr + head->next->nbr;
 		head->next->nbr = head->nbr - head->next->nbr;
 		head->nbr = head->nbr - head->next->nbr;
-		ft_putstr_fd(tag, 1);
+		if (tag)
+			ft_putstr_fd(tag, 1);
 	}
 }
 
-void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b)
+void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b, int key)
 {
-	swap_firstwo(stack_a, "sa");
-	swap_firstwo(stack_b, "sb");
-	ft_putstr_fd("ss\n", 1);
+	if (stack_a && stack_b)
+	{
+		if (key)
+		{
+			swap_firstwo(stack_a, "sa\n");
+			swap_firstwo(stack_b, "sb\n");
+			ft_putstr_fd("ss\n", 1);
+		}
+		else
+			swap_firstwo(stack_a, NULL);
+			swap_firstwo(stack_b, NULL);
+	}
+}
+
+void	exec_swap(t_stack *stack, char *action)
+{
+	if (action[1] == 'a')
+		swap_firstwo(stack->a, NULL);
+	else if (action[1] == 'b')
+		swap_firstwo(stack->b, NULL);
+	else if (action[1] == 's')
+		swap_a_b(stack->a, stack->b, 0);
 }

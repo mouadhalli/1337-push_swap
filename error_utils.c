@@ -48,13 +48,17 @@ int	is_int(char *str)
 
 int	is_sorted(t_nbr *head)
 {
-	while(head->next)
+	if (head)
 	{
-		if (head->nbr > head->next->nbr)
-			return (0);
-		head = head->next;
+		while(head->next)
+		{
+			if (head->nbr > head->next->nbr)
+				return (0);
+			head = head->next;
+		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	find_dup(t_nbr *tmp, int nbr, int counter)

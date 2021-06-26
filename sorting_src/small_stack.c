@@ -30,7 +30,7 @@ void	sort_five(t_nbr **head_a, t_nbr **head_b)
 	{
 		nbr = small_nbr(*head_a);
 		pos = get_pos(*head_a, nbr);
-		rotat_push(head_a, head_b, pos, "ra\n rra\n pa\n");
+		rotat_push(head_a, head_b, pos, "rb\n rrb\n pb\n");
 		if (stack_lenght(*head_a) == 3)
 		{
 			sort_tree(*head_a);
