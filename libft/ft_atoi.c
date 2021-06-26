@@ -15,7 +15,7 @@
 int		overlong(long result, long sign)
 {
 	if (result > 2147483648 && sign == -1)
-		return (0);
+		return (-1);
 	if (result > 2147483647 && sign == 1)
 		return (-1);
 	return (0);

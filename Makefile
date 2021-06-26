@@ -32,18 +32,18 @@ all: $(NAME)
 bonus: $(BONUS_NAME)
 
 $(NAME):
-	@make --no-print-directory -C libft
-	@gcc $(MOMALA7AT) $(SRC) $(LIBS) -g -o $(NAME)
+	@make -C libft
+	@gcc $(MOMALA7AT) $(FLAGS) $(SRC) $(LIBS) -g -o $(NAME)
 
 $(BONUS_NAME):
-	@make --no-print-directory -C libft
-	@gcc $(MOMALA7AT) $(BONUS_SRC) $(LIBS) -g -o $(BONUS_NAME)
+	@make -C libft
+	@gcc $(MOMALA7AT) $(FLAGS) $(BONUS_SRC) $(LIBS) -g -o $(BONUS_NAME)
 
 clean:
-	@make --no-print-directory -C libft clean
+	@make -C libft clean
 
 fclean: clean
-	@make --no-print-directory -C libft fclean
+	@make -C libft fclean
 	@rm -f $(NAME)
 	@rm -f $(BONUS_NAME)
 

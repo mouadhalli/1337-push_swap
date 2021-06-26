@@ -2,13 +2,14 @@
 
 void	stack_checker(t_stack *stack)
 {
-	if (stack->a)
-	{
+		if (stack->a == NULL)
+			exit_error(2, stack, 0);
+		if (stack_lenght(stack->a) == 1)
+			return;
 		if (is_duplicated(stack->a))
 			exit_error(2, stack, 1);
 		if (is_sorted(stack->a))
 			exit_error(2, stack, 0);
-	}
 }
 
 t_nbr    *getlast_node(t_nbr *head)

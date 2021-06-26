@@ -51,21 +51,11 @@ int		action_checker(char *buff)
 	int		len;
 
 	len = ft_strlen(buff);
-	if (len == 2 && is_action(buff)
-		|| len == 3 && is_action2(buff))
+	if ((len == 2 && is_action(buff))
+		|| (len == 3 && is_action2(buff)))
 		return (1);
 	return (0);
 }
-
-// void	exec_action(t_stack *stack, char *buff)
-// {
-// 	if (buff[0] == 's')
-// 		exec_swap(stack, buff);
-// 	else if (buff[0] == 'p')
-// 		exec_push(stack, buff);
-// 	else if (buff[0] == 'r')
-// 		exec_rotate(stack, buff);
-// }
 
 void	get_input(t_stack *stack)
 {
@@ -75,7 +65,6 @@ void	get_input(t_stack *stack)
 	{
 		if (!action_checker(buff))
 			exit_error(2, stack, 1);
-		// exec_action(stack, buff);
 		if (buff[0] == 's')
 			exec_swap(stack, buff);
 		else if (buff[0] == 'p')
