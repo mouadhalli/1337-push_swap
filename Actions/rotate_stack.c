@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate_stack.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/26 21:47:06 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/26 21:47:09 by mhalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 void	rev_rotate_stack(t_nbr *head, char *tag)
@@ -31,7 +43,7 @@ void	rotate_stack(t_nbr *head, char *tag)
 	if (head)
 	{
 		tmp = head->nbr;
-		while(head->next != NULL)
+		while (head->next != NULL)
 		{
 			head->nbr = head->next->nbr;
 			head->next->nbr = tmp;
@@ -53,8 +65,10 @@ void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key)
 			ft_putstr_fd("rrr\n", 1);
 		}
 		else
+		{
 			rev_rotate_stack(stack_a, NULL);
 			rev_rotate_stack(stack_b, NULL);
+		}
 	}
 }
 
@@ -66,11 +80,13 @@ void	rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key)
 		{
 			rotate_stack(stack_a, "ra\n");
 			rotate_stack(stack_b, "rb\n");
-				ft_putstr_fd("rr\n", 1);
+			ft_putstr_fd("rr\n", 1);
 		}
 		else
+		{
 			rotate_stack(stack_a, NULL);
 			rotate_stack(stack_b, NULL);
+		}
 	}
 }
 

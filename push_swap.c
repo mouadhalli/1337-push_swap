@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack		*stack;
 	int			lenght;
@@ -29,5 +29,5 @@ int		main(int argc, char **argv)
 			sort_bigstack(&stack);
 	}
 	stack = stack_destructor(stack);
-    return (0);
+	return (0);
 }

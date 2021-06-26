@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_stack.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/26 21:41:28 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/26 21:41:30 by mhalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 void	sort_tree(t_nbr *head)
@@ -10,7 +22,7 @@ void	sort_tree(t_nbr *head)
 		if (stack_lenght(head) == 3)
 		{
 			bignbr = bigest_nbr(head);
-	 		pos = get_pos(head, bignbr);
+			pos = get_pos(head, bignbr);
 			if (pos < 3)
 			{
 				if (pos == 1)
@@ -39,7 +51,7 @@ void	sort_five(t_nbr **head_a, t_nbr **head_b)
 			sort_tree(*head_a);
 			while (stack_lenght(*head_b) > 0)
 				push_stacktop(head_b, head_a, "pa\n");
-			break;
+			break ;
 		}
 	}
 }

@@ -35,8 +35,10 @@ void	swap_a_b(t_nbr *stack_a, t_nbr *stack_b, int key)
 			ft_putstr_fd("ss\n", 1);
 		}
 		else
+		{
 			swap_firstwo(stack_a, NULL);
 			swap_firstwo(stack_b, NULL);
+		}
 	}
 }
 

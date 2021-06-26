@@ -17,7 +17,7 @@ int	is_nbr(char *str)
 	int		i;
 
 	i = 0;
-    if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (!str[i])
 		return (0);
@@ -50,7 +50,7 @@ int	is_sorted(t_nbr *head)
 {
 	if (head)
 	{
-		while(head->next)
+		while (head->next)
 		{
 			if (head->nbr > head->next->nbr)
 				return (0);
@@ -81,7 +81,7 @@ int	is_duplicated(t_nbr *head)
 	int		counter;
 
 	tmp1 = head;
-	while(tmp1->next != NULL)
+	while (tmp1->next != NULL)
 	{
 		tmp2 = tmp1;
 		counter = 0;

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		is_action2(char *buff)
+int	is_action2(char *buff)
 {
 	if (buff[0] == 'r' && buff[1] == 'r')
 	{
@@ -23,7 +23,7 @@ int		is_action2(char *buff)
 	return (0);
 }
 
-int		is_action(char *buff)
+int	is_action(char *buff)
 {
 	if (buff[0] == 's')
 	{
@@ -46,7 +46,7 @@ int		is_action(char *buff)
 	return (0);
 }
 
-int		action_checker(char *buff)
+int	action_checker(char *buff)
 {
 	int		len;
 
@@ -77,7 +77,7 @@ void	get_input(t_stack *stack)
 	free(buff);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack		*stack;
 

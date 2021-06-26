@@ -1,12 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorting_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/26 21:43:38 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/26 21:43:39 by mhalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int		stack_lenght(t_nbr *head)
+int	stack_lenght(t_nbr *head)
 {
 	int		lenght;
 
 	lenght = 1;
-
 	if (!head)
 		return (0);
 	while (head->next != NULL)
@@ -17,7 +27,7 @@ int		stack_lenght(t_nbr *head)
 	return (lenght);
 }
 
-int		get_pos(t_nbr *head, int nbr)
+int	get_pos(t_nbr *head, int nbr)
 {
 	int		pos;
 
@@ -32,7 +42,7 @@ int		get_pos(t_nbr *head, int nbr)
 	return (pos);
 }
 
-int		bigest_nbr(t_nbr *head)
+int	bigest_nbr(t_nbr *head)
 {
 	int		nbr;
 
@@ -48,14 +58,14 @@ int		bigest_nbr(t_nbr *head)
 	return (nbr);
 }
 
-int		small_nbr(t_nbr *head)
+int	small_nbr(t_nbr *head)
 {
 	long		nbr;
 
 	nbr = head->nbr;
 	while (head->next != NULL)
 	{
-		if (head->nbr < nbr )
+		if (head->nbr < nbr)
 			nbr = head->nbr;
 		head = head->next;
 	}
@@ -64,7 +74,7 @@ int		small_nbr(t_nbr *head)
 	return (nbr);
 }
 
-int		chunk_calc(int len, int chunk, int lenght, int sign)
+int	chunk_calc(int len, int chunk, int lenght, int sign)
 {
 	int		res;
 

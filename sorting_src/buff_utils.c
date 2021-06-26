@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-int		get_nbrank(int *buff, int nbr, int lenght)
+int	get_nbrank(int *buff, int nbr, int lenght)
 {
 	int		i;
 
@@ -25,13 +25,13 @@ int		get_nbrank(int *buff, int nbr, int lenght)
 	return (i);
 }
 
-int		get_index(int lenght, int divisor, int chunk , int sign)
+int	get_index(int lenght, int divisor, int chunk, int sign)
 {
 	int		middle;
 	int		len;
 	int		ret;
 
-	middle = (lenght / 2) -1;
+	middle = (lenght / 2) - 1;
 	len = lenght / divisor;
 	if (sign == -1)
 		ret = middle - chunk_calc(len, chunk, lenght, -1);
@@ -50,7 +50,7 @@ int	*bubble_sort(int *buff, int lenght)
 	j = 0;
 	while (j < lenght - 1)
 	{
-		while (i < lenght - j -1)
+		while (i < lenght - j - 1)
 		{
 			if (buff[i] > buff[i + 1])
 			{
@@ -58,7 +58,7 @@ int	*bubble_sort(int *buff, int lenght)
 				buff[i] = buff[i + 1];
 				buff[i + 1] = tmp;
 			}
-			i++; 
+			i++;
 		}
 		i = 0;
 		j++;
@@ -80,7 +80,7 @@ int	*fill_buff(t_nbr *head, int *buff)
 	return (buff);
 }
 
-int		*init_buff(int *buff, t_nbr *content, int lenght)
+int	*init_buff(int *buff, t_nbr *content, int lenght)
 {
 	buff = ft_calloc(sizeof(int), lenght);
 	buff = fill_buff(content, buff);
