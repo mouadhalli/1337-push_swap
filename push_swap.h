@@ -13,27 +13,27 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "libft/libft.h"
-#include "GNL/get_next_line.h"
+// # include "libft/libft.h"
+# include "GNL/get_next_line.h"
 
-typedef	struct	s_nbr
+typedef struct s_nbr
 {
 	long			nbr;
-    struct s_nbr	*next;
+	struct s_nbr	*next;
 }				t_nbr;
 
-typedef	struct	s_stack
+typedef struct s_stack
 {
 	t_nbr	*a;
-    t_nbr 	*b;
+	t_nbr	*b;
 	int		*arr;
 }				t_stack;
 
 //---- LINKED LIST FUNCTIONS -----//
 
-t_nbr    *init_node(long nbr);
-void    add_node(t_nbr **head, t_nbr *new_node);
-t_nbr    *getlast_node(t_nbr *head);
+t_nbr	*init_node(long nbr);
+t_nbr	*getlast_node(t_nbr *head);
+void	add_node(t_nbr **head, t_nbr *new_node);
 void	print_list(t_nbr *head);
 void	remove_node(t_nbr **head, t_nbr *target);
 void	new_head(t_nbr **oldhead, t_nbr *newhead);
@@ -52,7 +52,6 @@ void	exec_rotate(t_stack *stack, char *action);
 void	exec_push(t_stack *stack, char *action);
 void	exec_swap(t_stack *stack, char *action);
 
-
 //---- PUSH SWAP UTILS -----//
 
 int		bigest_nbr(t_nbr *head);
@@ -63,8 +62,8 @@ void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
 void	exit_error(int stream, t_stack *stack, int key);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
-int     *init_buff(int *buff, t_nbr *content, int lenght);
-int		get_index(int lenght, int divisor, int chunk , int sign);
+int		*init_buff(int *buff, t_nbr *content, int lenght);
+int		get_index(int lenght, int divisor, int chunk, int sign);
 
 //---- ERROR MANAGEMENT FUNCITONS ---//
 
@@ -75,11 +74,16 @@ int		is_duplicated(t_nbr *head);
 
 //----------------------------------//
 
-t_stack *stack_constructor(t_stack *stack, int argc, char **argv);
+t_stack	*stack_constructor(t_stack *stack, int argc, char **argv);
 t_stack	*stack_destructor(t_stack *stack);
-void	 stack_checker(t_stack *stack);
-
+void	stack_checker(t_stack *stack);
 void	sort_smallstack(t_stack **stack);
 void	sort_bigstack(t_stack **stack);
+
+//----------------------------------//
+size_t	ft_strlen(const char *s);
+int		ft_atoi(const char *str);
+void	ft_putstr_fd(char *s, int fd);
+char	**ft_split(char const *s, char c);
 
 #endif

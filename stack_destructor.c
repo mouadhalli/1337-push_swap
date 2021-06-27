@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
 void	exit_error(int stream, t_stack *stack, int key)
 {
-    if (key)
-	    ft_putstr_fd("Error\n", stream);
-    stack_destructor(stack);
+	if (key)
+		ft_putstr_fd("Error\n", stream);
+	stack_destructor(stack);
 	exit(-1);
 }
 
@@ -40,8 +39,8 @@ t_stack	*stack_destructor(t_stack *stack)
 	{
 		free_list(&stack->a);
 		free_list(&stack->b);
-        if (stack->arr)
-		    free(stack->arr);
+		if (stack->arr)
+			free(stack->arr);
 		free(stack);
 	}
 	return (NULL);

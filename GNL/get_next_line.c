@@ -18,7 +18,8 @@ char	*ft_fill(int fd, char *str)
 	int		rd;
 	char	*temp;
 
-	if (!(buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (0);
 	if (fd < 0 || read(fd, buffer, 0) < 0 || BUFFER_SIZE < 1)
 		return (0);
@@ -26,7 +27,8 @@ char	*ft_fill(int fd, char *str)
 		str = ft_strdup("");
 	while (!(ft_strchr(str, '\n')))
 	{
-		if ((rd = read(fd, buffer, BUFFER_SIZE)) < 0)
+		rd = read(fd, buffer, BUFFER_SIZE);
+		if (rd < 0)
 			return (0);
 		buffer[rd] = '\0';
 		temp = str;
@@ -39,14 +41,15 @@ char	*ft_fill(int fd, char *str)
 	return (str);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static	char	*str;
+	static char		*str;
 	char			*temp;
 	int				len;
 
 	len = 0;
-	if (!line || !(str = ft_fill(fd, str)))
+	str = ft_fill(fd, str);
+	if (!line || !str)
 		return (-1);
 	if (ft_strchr(str, '\n'))
 	{
