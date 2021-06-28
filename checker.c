@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 
 	stack = NULL;
 	stack = stack_constructor(stack, argc, argv);
-	stack_checker(stack);
+	stack_checker(stack, 1);
 	get_input(stack);
 	if (stack->b == NULL && is_sorted(stack->a))
 		ft_putstr_fd("OK\n", 1);

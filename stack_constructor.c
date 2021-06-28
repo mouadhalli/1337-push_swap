@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	stack_checker(t_stack *stack)
+void	stack_checker(t_stack *stack, int is_checker)
 {
 	if (stack->a == NULL)
 		exit_error(2, stack, 0);
@@ -20,7 +20,7 @@ void	stack_checker(t_stack *stack)
 		return ;
 	if (is_duplicated(stack->a))
 		exit_error(2, stack, 1);
-	if (is_sorted(stack->a))
+	if (!is_checker && is_sorted(stack->a))
 		exit_error(2, stack, 0);
 }
 
@@ -76,8 +76,8 @@ t_stack	*stack_constructor(t_stack *stack, int input_len, char **argv)
 			if (!is_nbr(input[j]) || !is_int(input[j]))
 				exit_error(2, stack, 1);
 			add_node(&stack->a, init_node(ft_atoi(input[j++])));
+			free_arr(input);
 		}
 	}
-	free_arr(input);
 	return (stack);
 }
