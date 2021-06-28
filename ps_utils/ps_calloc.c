@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ps_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 02:42:02 by mhalli            #+#    #+#             */
-/*   Updated: 2019/11/25 05:31:22 by mhalli           ###   ########.fr       */
+/*   Created: 2021/06/28 15:19:24 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/28 15:19:26 by mhalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-int		ft_isdigit(int c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	void	*b;
+
+	b = malloc(count * size);
+	if (!b)
+		return (NULL);
+	ft_bzero(b, count * size);
+	return (b);
 }

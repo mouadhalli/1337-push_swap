@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-int		overlong(long result, long sign)
+int	overlong(long result, long sign)
 {
 	if (result > 2147483648 && sign == -1)
 		return (-1);
@@ -21,7 +21,7 @@ int		overlong(long result, long sign)
 	return (0);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long	result;
 	long	sign;
@@ -42,7 +42,7 @@ int		ft_atoi(const char *str)
 			return (result * sign);
 		result = (result * 10) + (*str - '0');
 		if ((result > 2147483648 && sign == -1)
-				|| (result > 2147483647 && sign == 1))
+			|| (result > 2147483647 && sign == 1))
 			return (overlong(result, sign));
 		str++;
 	}

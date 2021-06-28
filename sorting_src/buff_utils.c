@@ -80,10 +80,12 @@ int	*fill_buff(t_nbr *head, int *buff)
 	return (buff);
 }
 
-int	*init_buff(int *buff, t_nbr *content, int lenght)
+int	*init_buff(t_nbr *content, int lenght)
 {
+	int		*buff;
+
 	buff = ft_calloc(sizeof(int), lenght);
-	buff = fill_buff(content, buff);
-	buff = bubble_sort(buff, lenght);
+	fill_buff(content, buff);
+	bubble_sort(buff, lenght);
 	return (buff);
 }

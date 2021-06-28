@@ -63,17 +63,17 @@ void	push_rotate(t_stack **stack, int lenght, int div, int chunk)
 	int		right_middle;
 	int		left_middle;
 
-	right_middle = get_index(lenght, div, chunk, -1);
-	left_middle = get_index(lenght, div, chunk, 1);
+	left_middle = get_index(lenght, div, chunk, -1);
+	right_middle = get_index(lenght, div, chunk, 1);
 	middle = lenght / 2 - 1;
 	nbr = (*stack)->a->nbr;
-	if (nbr >= (*stack)->arr[right_middle]
+	if (nbr >= (*stack)->arr[left_middle]
 		&& (nbr < (*stack)->arr[middle]))
 	{
 		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
 		rotate_stack((*stack)->b, "rb\n");
 	}
-	else if (nbr <= (*stack)->arr[left_middle]
+	else if (nbr <= (*stack)->arr[right_middle]
 		&& (nbr >= (*stack)->arr[middle]))
 		push_stacktop(&(*stack)->a, &(*stack)->b, "pb\n");
 	else
@@ -89,7 +89,7 @@ void	middpoint_algo(t_stack **stack, int divisor)
 
 	lenght = stack_lenght((*stack)->a);
 	chunk = 1;
-	(*stack)->arr = init_buff((*stack)->arr, (*stack)->a, lenght);
+	(*stack)->arr = init_buff((*stack)->a, lenght);
 	while (stack_lenght((*stack)->a) > 0)
 	{
 		i = -1;

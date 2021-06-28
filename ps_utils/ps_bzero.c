@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ps_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 14:09:35 by mhalli            #+#    #+#             */
-/*   Updated: 2019/12/06 08:03:05 by mhalli           ###   ########.fr       */
+/*   Created: 2021/06/28 15:26:46 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/28 15:26:51 by mhalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	char			k;
+	char	*l;
+	int		i;
 
 	i = 0;
-	k = (char)c;
-	while (s[i] != '\0' && s[i] != k)
-		i++;
-	if (s[i] == k)
-		return ((char *)s + i);
-	return (NULL);
+	l = s;
+	while ((size_t)i < n)
+		l[i++] = '\0';
 }

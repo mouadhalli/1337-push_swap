@@ -62,7 +62,7 @@ void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
 void	exit_error(int stream, t_stack *stack, int key);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
-int		*init_buff(int *buff, t_nbr *content, int lenght);
+int		*init_buff(t_nbr *content, int lenght);
 int		get_index(int lenght, int divisor, int chunk, int sign);
 
 //---- ERROR MANAGEMENT FUNCITONS ---//
@@ -85,5 +85,10 @@ size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+int		ft_isdigit(int c);
+void	ft_putchar_fd(char c, int fd);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_bzero(void *s, size_t n);
 
 #endif

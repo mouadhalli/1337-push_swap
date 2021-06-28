@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-static int		howmanyword(const char *s, char c)
+static int	howmanyword(const char *s, char c)
 {
 	int		key;
 	int		words;
@@ -35,7 +35,7 @@ static int		howmanyword(const char *s, char c)
 	return (words);
 }
 
-static void		*frree(char **tab, int j)
+static void	*frree(char **tab, int j)
 {
 	while (j--)
 		free(tab[j]);
@@ -43,7 +43,7 @@ static void		*frree(char **tab, int j)
 	return (NULL);
 }
 
-static int		wordlenght(const char *s, char c, int i)
+static int	wordlenght(const char *s, char c, int i)
 {
 	int		lenght;
 
@@ -56,7 +56,7 @@ static int		wordlenght(const char *s, char c, int i)
 	return (lenght);
 }
 
-static char		**dotherest(const char *s, char c, char **tab)
+static char	**dotherest(const char *s, char c, char **tab)
 {
 	int		i;
 	int		j;
@@ -82,13 +82,14 @@ static char		**dotherest(const char *s, char c, char **tab)
 	return (tab);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 
 	if (!s)
 		return (NULL);
-	if (!(tab = malloc(8 * (howmanyword(s, c) + 1))))
+	tab = malloc(8 * (howmanyword(s, c) + 1));
+	if (!tab)
 		return (NULL);
 	return (dotherest(s, c, tab));
 }

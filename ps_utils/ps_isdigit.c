@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnlen.c                                       :+:      :+:    :+:   */
+/*   ps_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/21 20:13:54 by mhalli            #+#    #+#             */
-/*   Updated: 2019/11/25 05:41:20 by mhalli           ###   ########.fr       */
+/*   Created: 2021/06/28 15:21:26 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/28 15:21:27 by mhalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-size_t		ft_strnlen(const char *s, size_t maxlen)
+int	ft_isdigit(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0' && i < maxlen)
-		i++;
-	return (i);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
