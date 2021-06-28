@@ -79,6 +79,7 @@ t_stack	*stack_destructor(t_stack *stack);
 void	stack_checker(t_stack *stack);
 void	sort_smallstack(t_stack **stack);
 void	sort_bigstack(t_stack **stack);
+void	free_arr(char **arr);
 
 //----------------------------------//
 size_t	ft_strlen(const char *s);

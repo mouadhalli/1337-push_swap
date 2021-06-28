@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_constructor.c                                :+:      :+:    :+:   */
+/*   stack_constructor_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhalli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 21:51:21 by mhalli            #+#    #+#             */
-/*   Updated: 2021/06/26 21:51:22 by mhalli           ###   ########.fr       */
+/*   Created: 2021/06/28 17:31:33 by mhalli            #+#    #+#             */
+/*   Updated: 2021/06/28 17:31:34 by mhalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	stack_checker(t_stack *stack)
 {
@@ -20,8 +20,6 @@ void	stack_checker(t_stack *stack)
 		return ;
 	if (is_duplicated(stack->a))
 		exit_error(2, stack, 1);
-	if (is_sorted(stack->a))
-		exit_error(2, stack, 0);
 }
 
 t_nbr	*getlast_node(t_nbr *head)
