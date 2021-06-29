@@ -76,8 +76,8 @@ t_stack	*stack_constructor(t_stack *stack, int input_len, char **argv)
 			if (!is_nbr(input[j]) || !is_int(input[j]))
 				exit_error(2, stack, 1);
 			add_node(&stack->a, init_node(ft_atoi(input[j++])));
-			free_arr(input);
 		}
+		free_arr(input);
 	}
 	return (stack);
 }

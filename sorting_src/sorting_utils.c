@@ -74,6 +74,9 @@ int	small_nbr(t_nbr *head)
 	return (nbr);
 }
 
+//len => chunk_len = 16
+//chunk = 1
+//lenght = 100
 int	chunk_calc(int len, int chunk, int lenght, int sign)
 {
 	int		res;

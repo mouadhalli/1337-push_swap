@@ -28,22 +28,20 @@ BONUS_SRC = checker.c sorting_src/buff_utils.c error_utils.c stack_constructor.c
 
 FLAGS = -Wall -Wextra -Werror
 
-LIBS = libft/libft.a \
-
 all: $(NAME)
 bonus: $(BONUS_NAME)
 
 $(NAME):
-	@gcc $(FLAGS) $(SRC) -g -o $(NAME)
+	@gcc $(FLAGS) $(SRC) -o $(NAME)
 
 $(BONUS_NAME):
-	@gcc $(FLAGS) $(BONUS_SRC) -g -o $(BONUS_NAME)
+	@gcc $(FLAGS) $(BONUS_SRC) -o $(BONUS_NAME)
 
 clean:
-	@rm -rf *.o
+	@rm -rf *.o */*.o
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(BONUS_NAME)
 
-re:	fclean all
+re:	fclean all 
