@@ -58,25 +58,6 @@ int	bigest_nbr(t_nbr *head)
 	return (nbr);
 }
 
-int	small_nbr(t_nbr *head)
-{
-	long		nbr;
-
-	nbr = head->nbr;
-	while (head->next != NULL)
-	{
-		if (head->nbr < nbr)
-			nbr = head->nbr;
-		head = head->next;
-	}
-	if (head->nbr < nbr)
-		nbr = head->nbr;
-	return (nbr);
-}
-
-//len => chunk_len = 16
-//chunk = 1
-//lenght = 100
 int	chunk_calc(int len, int chunk, int lenght, int sign)
 {
 	int		res;

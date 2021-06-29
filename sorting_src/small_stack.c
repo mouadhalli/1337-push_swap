@@ -12,6 +12,22 @@
 
 #include "../push_swap.h"
 
+int	small_nbr(t_nbr *head)
+{
+	long		nbr;
+
+	nbr = head->nbr;
+	while (head->next != NULL)
+	{
+		if (head->nbr < nbr)
+			nbr = head->nbr;
+		head = head->next;
+	}
+	if (head->nbr < nbr)
+		nbr = head->nbr;
+	return (nbr);
+}
+
 void	sort_tree(t_nbr *head)
 {
 	int		bignbr;

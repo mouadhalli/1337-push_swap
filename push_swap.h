@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "GNL/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 
 typedef struct s_nbr
 {
@@ -28,17 +28,12 @@ typedef struct s_stack
 	int		*arr;
 }				t_stack;
 
-//---- LINKED LIST FUNCTIONS -----//
-
 t_nbr	*init_node(long nbr);
 t_nbr	*getlast_node(t_nbr *head);
 void	add_node(t_nbr **head, t_nbr *new_node);
-void	print_list(t_nbr *head);
 void	remove_node(t_nbr **head, t_nbr *target);
 void	new_head(t_nbr **oldhead, t_nbr *newhead);
 void	free_list(t_nbr **list);
-
-//---- PUSH SWAP ACTIONS -----//
 
 void	push_stacktop(t_nbr	**target, t_nbr **dst, char *tag);
 void	rev_rotate_ab(t_nbr *stack_a, t_nbr *stack_b, int key);
@@ -51,10 +46,7 @@ void	exec_rotate(t_stack *stack, char *action);
 void	exec_push(t_stack *stack, char *action);
 void	exec_swap(t_stack *stack, char *action);
 
-//---- PUSH SWAP UTILS -----//
-
 int		bigest_nbr(t_nbr *head);
-int		small_nbr(t_nbr *head);
 int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
 void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
@@ -64,14 +56,10 @@ int		get_nbrank(int *buff, int nbr, int lenght);
 int		*init_buff(t_nbr *content, int lenght);
 int		get_index(int lenght, int divisor, int chunk, int sign);
 
-//---- ERROR MANAGEMENT FUNCITONS ---//
-
 int		is_nbr(char *str);
 int		is_int(char *nbr);
 int		is_sorted(t_nbr *head);
 int		is_duplicated(t_nbr *head);
-
-//----------------------------------//
 
 t_stack	*stack_constructor(t_stack *stack, int argc, char **argv);
 t_stack	*stack_destructor(t_stack *stack);
@@ -80,7 +68,6 @@ void	sort_smallstack(t_stack **stack);
 void	sort_bigstack(t_stack **stack);
 void	free_arr(char **arr);
 
-//----------------------------------//
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);

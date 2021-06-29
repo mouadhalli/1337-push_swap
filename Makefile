@@ -22,7 +22,7 @@ SRC = push_swap.c sorting_src/buff_utils.c error_utils.c stack_constructor.c sta
 BONUS_SRC = checker.c sorting_src/buff_utils.c error_utils.c stack_constructor.c stack_destructor.c \
 		Actions/push_stack.c Actions/rotate_stack.c Actions/swap_stack.c Actions/actions_utils.c\
 		sorting_src/big_stack.c sorting_src/small_stack.c sorting_src/sorting_utils.c \
-		GNL/get_next_line.c GNL/get_next_line_utils.c \
+		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		ps_utils/ps_atoi.c ps_utils/ps_strlen.c ps_utils/ps_putstr.c ps_utils/ps_split.c ps_utils/ps_isdigit.c \
 		ps_utils/ps_putchar.c ps_utils/ps_strncmp.c ps_utils/ps_calloc.c ps_utils/ps_bzero.c
 
@@ -45,3 +45,5 @@ fclean: clean
 	@rm -f $(BONUS_NAME)
 
 re:	fclean all 
+
+.PHONY: clean fclean re
