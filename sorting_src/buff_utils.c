@@ -31,7 +31,7 @@ int	get_index(int lenght, int divisor, int chunk, int sign)
 	int		len;
 	int		ret;
 
-	middle = (lenght / 2) - 1;
+	middle = (lenght / 2);
 	len = lenght / divisor;
 	if (sign == -1)
 		ret = middle - chunk_calc(len, chunk, lenght, -1);

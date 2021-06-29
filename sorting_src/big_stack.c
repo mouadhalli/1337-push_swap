@@ -65,7 +65,7 @@ void	push_rotate(t_stack **stack, int lenght, int div, int chunk)
 
 	left_middle = get_index(lenght, div, chunk, -1);
 	right_middle = get_index(lenght, div, chunk, 1);
-	middle = lenght / 2 - 1;
+	middle = lenght / 2;
 	nbr = (*stack)->a->nbr;
 	if (nbr >= (*stack)->arr[left_middle]
 		&& (nbr < (*stack)->arr[middle]))

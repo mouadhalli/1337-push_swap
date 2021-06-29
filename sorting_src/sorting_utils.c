@@ -65,7 +65,7 @@ int	chunk_calc(int len, int chunk, int lenght, int sign)
 	res = len * chunk;
 	if (res > (lenght / 2))
 		res = lenght / 2;
-	if (sign == -1 && res == (lenght / 2))
+	if (sign == 1 && res == lenght / 2 && (lenght % 2) == 0)
 		res -= 1;
 	return (res);
 }
