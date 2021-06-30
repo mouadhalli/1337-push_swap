@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-void	exit_error(int stream, t_stack *stack, int key)
+void	exit_error(int stream, t_stack *stack, int key, int status)
 {
 	if (key)
 		ft_putstr_fd("Error\n", stream);
 	stack_destructor(stack);
-	exit(-1);
+	exit(status);
 }
 
 void	free_list(t_nbr **list)

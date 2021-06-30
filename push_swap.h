@@ -50,7 +50,7 @@ int		bigest_nbr(t_nbr *head);
 int		get_pos(t_nbr *head, int nbr);
 int		stack_lenght(t_nbr *head);
 void	rotat_push(t_nbr **head_a, t_nbr **head_b, int index, char *tag);
-void	exit_error(int stream, t_stack *stack, int key);
+void	exit_error(int stream, t_stack *stack, int key, int status);
 int		chunk_calc(int len, int chunk, int lenght, int m);
 int		get_nbrank(int *buff, int nbr, int lenght);
 int		*init_buff(t_nbr *content, int lenght);

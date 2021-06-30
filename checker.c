@@ -64,7 +64,7 @@ void	get_input(t_stack *stack)
 	while (get_next_line(0, &buff))
 	{
 		if (!action_checker(buff))
-			exit_error(2, stack, 1);
+			exit_error(2, stack, 1, -1);
 		if (buff[0] == 's')
 			exec_swap(stack, buff);
 		else if (buff[0] == 'p')
